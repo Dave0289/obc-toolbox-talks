@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>OBC Weekly Toolbox Talk</title>
   <meta name="description" content="OBC Weekly Toolbox Talk acknowledgement" />
+  <meta http-equiv="Cache-Control" content="no-store" />
 
   <style>
     :root{
@@ -15,14 +16,16 @@
       --accent:#5bc0be;
       --shadow: 0 18px 45px rgba(0,0,0,.45);
       --radius: 18px;
-
-      --okBg: rgba(34,197,94,.18);
-      --okBorder: rgba(34,197,94,.35);
-      --okText: #d1fae5;
-
-      --errBg: rgba(239,68,68,.14);
-      --errBorder: rgba(239,68,68,.35);
-      --errText: rgba(254,226,226,.95);
+      --card1: rgba(17,28,52,.85);
+      --card2: rgba(16,26,48,.65);
+      --stroke: rgba(255,255,255,.10);
+      --stroke2: rgba(255,255,255,.14);
+      --successBg: rgba(46, 204, 113, .16);
+      --successStroke: rgba(46, 204, 113, .45);
+      --successText: rgba(210, 255, 230, .98);
+      --errorBg: rgba(231, 76, 60, .14);
+      --errorStroke: rgba(231, 76, 60, .45);
+      --errorText: rgba(255, 225, 222, .98);
     }
 
     *{ box-sizing:border-box; }
@@ -46,7 +49,7 @@
 
     .header{
       display:flex;
-      align-items:center;
+      align-items:flex-start;
       justify-content:space-between;
       flex-wrap:wrap;
       gap:14px;
@@ -57,12 +60,13 @@
       display:flex;
       gap:14px;
       align-items:center;
+      min-width: 320px;
     }
 
     .badge{
-      width:48px;
-      height:48px;
-      border-radius:14px;
+      width:52px;
+      height:52px;
+      border-radius:16px;
       background: linear-gradient(135deg, rgba(91,192,190,.95), rgba(122,167,255,.85));
       box-shadow: 0 12px 28px rgba(0,0,0,.35);
       flex:0 0 auto;
@@ -72,6 +76,7 @@
       margin:0;
       font-size: clamp(22px, 3vw, 34px);
       line-height:1.15;
+      letter-spacing: .2px;
     }
 
     .sub{
@@ -88,6 +93,26 @@
       border:1px solid rgba(255,255,255,.10);
       background: rgba(10,16,30,.45);
       white-space:nowrap;
+      align-self:center;
+    }
+
+    .banner{
+      display:none;
+      margin: 0 0 14px 0;
+      padding: 12px 14px;
+      border-radius: 12px;
+      border: 1px solid var(--successStroke);
+      background: var(--successBg);
+      color: var(--successText);
+      box-shadow: 0 10px 22px rgba(0,0,0,.22);
+      font-size: 14px;
+      line-height: 1.25;
+    }
+
+    .banner.error{
+      border-color: var(--errorStroke);
+      background: var(--errorBg);
+      color: var(--errorText);
     }
 
     .panel{
@@ -96,185 +121,173 @@
       background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03));
       box-shadow: var(--shadow);
       overflow:hidden;
-    }
-
-    .panelInner{ padding:18px; }
-
-    .banner{
-      margin: 0 0 14px 0;
-      padding: 12px 14px;
-      border-radius: 14px;
-      border: 1px solid rgba(255,255,255,.12);
-      background: rgba(255,255,255,.06);
-      color: var(--ink);
-      display:none;
-    }
-    .banner.ok{
-      display:block;
-      background: var(--okBg);
-      border-color: var(--okBorder);
-      color: var(--okText);
-    }
-    .banner.err{
-      display:block;
-      background: var(--errBg);
-      border-color: var(--errBorder);
-      color: var(--errText);
+      padding: 16px;
     }
 
     .grid{
       display:grid;
-      grid-template-columns: repeat(12, 1fr);
+      grid-template-columns: 1.25fr .85fr;
       gap:14px;
-      align-items:stretch;
     }
 
     .card{
       border-radius:16px;
-      border:1px solid rgba(255,255,255,.10);
-      background: linear-gradient(180deg, rgba(17,28,52,.85), rgba(16,26,48,.65));
+      border:1px solid var(--stroke);
+      background: linear-gradient(180deg, var(--card1), var(--card2));
       box-shadow: 0 14px 28px rgba(0,0,0,.25);
       overflow:hidden;
       min-height: 420px;
     }
 
-    .talk{ grid-column: span 7; }
-    .ack{ grid-column: span 5; }
-
-    .cardHead{
-      padding:16px 16px 12px;
-      border-bottom: 1px solid rgba(255,255,255,.08);
+    .cardHeader{
       display:flex;
-      align-items:flex-start;
+      align-items:center;
       justify-content:space-between;
       gap:10px;
+      padding: 14px 16px;
+      border-bottom:1px solid rgba(255,255,255,.08);
     }
 
-    .kicker{
-      color: var(--muted);
-      font-size: 12.5px;
-      margin-top:6px;
-    }
-
-    .pill{
+    .chip{
       font-size:12px;
       padding:6px 10px;
       border-radius:999px;
-      border:1px solid rgba(255,255,255,.12);
+      border:1px solid rgba(255,255,255,.14);
       background: rgba(255,255,255,.06);
-      color: rgba(234,240,255,.92);
+      color: rgba(234,240,255,.95);
       white-space:nowrap;
-      height: fit-content;
-      margin-top:2px;
+    }
+
+    .talkTitle{
+      font-size: 16px;
+      font-weight: 700;
+      margin:0;
+    }
+
+    .talkMeta{
+      margin: 2px 0 0 0;
+      font-size: 12px;
+      color: rgba(183,196,224,.92);
     }
 
     .cardBody{
-      padding:16px;
+      padding: 14px 16px 16px 16px;
     }
 
+    /* LEFT: talk scroll area */
     .talkScroll{
-      max-height: 520px;
+      max-height: 64vh;
       overflow:auto;
-      padding-right: 10px;
+      padding-right: 8px;
     }
 
-    .talkMetaLine{
-      display:flex;
-      flex-wrap:wrap;
-      gap:8px;
-      margin: 0 0 12px 0;
-      color: rgba(234,240,255,.92);
-      font-weight: 700;
-    }
-    .talkMetaLine span{
-      color: var(--muted);
-      font-weight: 600;
+    .talkScroll h2{
+      margin: 8px 0 10px 0;
+      font-size: 26px;
+      letter-spacing: .2px;
     }
 
-    /* Markdown-ish display */
-    .md h2, .md h3{
-      margin: 14px 0 8px;
-    }
-    .md p{
-      margin: 8px 0;
-      color: rgba(234,240,255,.92);
-      line-height: 1.45;
-    }
-    .md ul{
-      margin: 8px 0 12px 18px;
-      color: rgba(234,240,255,.92);
-      line-height: 1.45;
-    }
-    .md li{ margin: 6px 0; }
-
-    /* Form */
-    label{
-      display:block;
-      font-size: 12.5px;
-      color: var(--muted);
-      margin: 0 0 6px 2px;
-    }
-
-    input[type="text"]{
-      width:100%;
-      padding: 12px 12px;
-      border-radius: 12px;
-      border: 1px solid rgba(255,255,255,.14);
-      background: rgba(255,255,255,.92);
-      color: #0b1220;
-      font-size: 14px;
-      outline: none;
-    }
-
-    .checkRow{
-      margin-top: 12px;
+    .kv{
+      display:grid;
+      grid-template-columns: 90px 1fr;
+      gap: 6px 10px;
+      margin: 10px 0 14px 0;
       padding: 10px 12px;
       border-radius: 12px;
       border: 1px solid rgba(255,255,255,.10);
-      background: rgba(255,255,255,.06);
-      display:flex;
-      gap:10px;
-      align-items:flex-start;
-      color: rgba(234,240,255,.92);
-      font-size: 13px;
-      line-height: 1.35;
+      background: rgba(0,0,0,.16);
     }
+    .k{ color: rgba(183,196,224,.95); font-size: 13px; }
+    .v{ color: rgba(234,240,255,.98); font-size: 13px; font-weight: 600; }
+
+    .md{
+      color: rgba(234,240,255,.96);
+      font-size: 14px;
+      line-height: 1.45;
+      white-space: normal;
+    }
+    .md h1,.md h2,.md h3{ margin: 14px 0 8px 0; }
+    .md ul{ margin: 8px 0 8px 20px; }
+    .md li{ margin: 4px 0; }
+    .md p{ margin: 8px 0; }
+
+    /* RIGHT: form */
+    .formRow{ margin-bottom: 12px; }
+
+    label{
+      display:block;
+      font-size: 12px;
+      color: rgba(183,196,224,.95);
+      margin-bottom: 6px;
+    }
+
+    input[type="text"]{
+      width: 100%;
+      padding: 12px 12px;
+      border-radius: 12px;
+      border: 1px solid rgba(255,255,255,.10);
+      background: rgba(255,255,255,.08);
+      color: rgba(234,240,255,.98);
+      outline: none;
+    }
+    input[type="text"]::placeholder{ color: rgba(183,196,224,.75); }
+
+    .checkLine{
+      display:flex;
+      gap: 10px;
+      align-items:flex-start;
+      padding: 10px 12px;
+      border-radius: 12px;
+      border: 1px solid rgba(255,255,255,.10);
+      background: rgba(0,0,0,.16);
+      color: rgba(234,240,255,.96);
+      font-size: 13px;
+      line-height: 1.25;
+    }
+
+    .checkLine input{ margin-top: 2px; }
 
     .btn{
       width:100%;
-      margin-top: 12px;
       padding: 12px 14px;
       border-radius: 12px;
-      border: 1px solid rgba(255,255,255,.16);
-      background: linear-gradient(135deg, rgba(91,192,190,.95), rgba(122,167,255,.85));
-      color:#06101f;
-      font-weight: 800;
-      letter-spacing: .2px;
+      border: none;
       cursor:pointer;
-      font-size: 14px;
-      box-shadow: 0 14px 28px rgba(0,0,0,.25);
+      font-size: 15px;
+      font-weight: 700;
+      letter-spacing: .2px;
+      background: linear-gradient(90deg, rgba(91,192,190,.95), rgba(122,167,255,.85));
+      color: rgba(10,16,30,.98);
+      box-shadow: 0 12px 24px rgba(0,0,0,.22);
     }
-    .btn:active{ transform: translateY(1px); }
+    .btn:disabled{
+      opacity:.55;
+      cursor:not-allowed;
+    }
 
-    .footer{
-      margin-top:12px;
-      text-align:center;
-      font-size:12px;
+    .foot{
+      margin-top: 10px;
+      font-size: 12px;
       color: rgba(183,196,224,.85);
+      text-align:center;
+    }
+
+    .smallNote{
+      margin-top: 10px;
+      font-size: 12px;
+      color: rgba(183,196,224,.85);
+      line-height: 1.35;
     }
 
     @media (max-width: 980px){
-      .talk{ grid-column: span 12; }
-      .ack{ grid-column: span 12; }
-      .talkScroll{ max-height: 420px; }
-      .meta{ width:100%; text-align:center; }
+      .grid{ grid-template-columns: 1fr; }
+      .talkScroll{ max-height: 52vh; }
     }
   </style>
 </head>
 
 <body>
   <div class="wrap">
-
     <div class="header">
       <div class="titleBlock">
         <div class="badge"></div>
@@ -286,223 +299,215 @@
       <div class="meta">Internal Use • OSHA-Themed</div>
     </div>
 
-    <!-- Single top banner only -->
-    <div id="bannerOk" class="banner ok">✅ Thank you — submitted.</div>
-    <div id="bannerErr" class="banner err">❌ Could not submit. Please check signal and try again.</div>
+    <!-- Success banner (like your training modules) -->
+    <div id="banner" class="banner">✅ Thank you — your acknowledgement was submitted.</div>
 
     <div class="panel">
-      <div class="panelInner">
-        <div class="grid">
+      <div class="grid">
 
-          <!-- LEFT: Talk -->
-          <section class="card talk" aria-label="Toolbox Talk">
-            <div class="cardHead">
-              <div>
-                <div style="font-weight:900; font-size:18px;" id="talkTitleTop">Toolbox Talk</div>
-                <div class="kicker" id="talkSubTop">Week of — • Applies to —</div>
-              </div>
-              <div class="pill">Toolbox Talk</div>
+        <!-- LEFT: talk -->
+        <section class="card" aria-label="Toolbox talk">
+          <div class="cardHeader">
+            <div>
+              <p id="talkTitleTop" class="talkTitle">Loading…</p>
+              <p id="talkMetaTop" class="talkMeta">Please wait.</p>
             </div>
+            <span class="chip">Toolbox Talk</span>
+          </div>
 
-            <div class="cardBody">
-              <div class="talkScroll">
-                <div class="talkMetaLine"><span>Week of:</span> <div id="talkWeek"></div></div>
-                <div class="talkMetaLine"><span>Applies to:</span> <div id="talkArea"></div></div>
+          <div class="cardBody">
+            <div class="talkScroll">
+              <h2 id="talkTitleH2">Loading…</h2>
 
-                <div class="md" id="talkBody">
-                  Loading…
-                </div>
+              <div class="kv">
+                <div class="k">Week of:</div>
+                <div id="weekOf" class="v">—</div>
+                <div class="k">Applies to:</div>
+                <div id="area" class="v">—</div>
+              </div>
+
+              <div id="md" class="md">
+                Loading talk content…
               </div>
             </div>
-          </section>
+          </div>
+        </section>
 
-          <!-- RIGHT: Acknowledgement -->
-          <section class="card ack" aria-label="Acknowledgement">
-            <div class="cardHead">
-              <div>
-                <div style="font-weight:900; font-size:18px;">Acknowledgement</div>
-                <div class="kicker">Enter your name and confirm you read this talk.</div>
-              </div>
-              <div class="pill" id="statusPill" style="display:none;">Submitted</div>
+        <!-- RIGHT: acknowledgement -->
+        <section class="card" aria-label="Acknowledgement">
+          <div class="cardHeader">
+            <div>
+              <p class="talkTitle">Acknowledgement</p>
+              <p class="talkMeta">Enter your name and confirm you read this talk.</p>
             </div>
+            <!-- NO extra submit button here -->
+            <span id="statusChip" class="chip" style="border-color: rgba(255,255,255,.14);">Ready</span>
+          </div>
 
-            <div class="cardBody">
+          <div class="cardBody">
 
-              <!-- REAL NETLIFY FORM (no JS submit) -->
-              <form name="toolbox-ack"
-                    method="POST"
-                    data-netlify="true"
-                    netlify-honeypot="bot-field"
-                    action="/talks/?submitted=1">
+            <!-- IMPORTANT: This is a REAL Netlify form -->
+            <!-- Netlify detects it at deploy time. -->
+            <form
+              id="ackForm"
+              name="toolbox-ack"
+              method="POST"
+              data-netlify="true"
+              action="/?submitted=true"
+            >
+              <input type="hidden" name="form-name" value="toolbox-ack" />
 
-                <!-- REQUIRED for reliable detection -->
-                <input type="hidden" name="form-name" value="toolbox-ack" />
+              <!-- Hidden fields that will be captured with the form -->
+              <input type="hidden" name="talk_title" id="f_talk_title" value="" />
+              <input type="hidden" name="talk_week_of" id="f_talk_week_of" value="" />
+              <input type="hidden" name="talk_area" id="f_talk_area" value="" />
+              <input type="hidden" name="talk_file" id="f_talk_file" value="" />
 
-                <!-- Honeypot -->
-                <p style="display:none;">
-                  <label>Don’t fill this out: <input name="bot-field" /></label>
-                </p>
-
+              <div class="formRow">
                 <label for="employee">Employee name</label>
-                <input id="employee" name="employee" type="text" autocomplete="name" required />
+                <input id="employee" type="text" name="employee" placeholder="First Last" required />
+              </div>
 
-                <div class="checkRow">
-                  <input id="ack" name="acknowledged" type="checkbox" value="Yes" required />
-                  <label for="ack" style="margin:0; color: rgba(234,240,255,.92); font-size:13px;">
-                    I have read and understand this toolbox talk and will follow the safety requirements.
-                  </label>
-                </div>
+              <div class="formRow">
+                <label class="checkLine">
+                  <input id="ack" type="checkbox" name="acknowledged" value="yes" required />
+                  I have read and understand this toolbox talk and will follow the safety requirements.
+                </label>
+              </div>
 
-                <!-- Helpful metadata sent to Netlify -->
-                <input type="hidden" id="metaTitle" name="talk_title" value="">
-                <input type="hidden" id="metaWeek" name="week_of" value="">
-                <input type="hidden" id="metaArea" name="area" value="">
-                <input type="hidden" id="metaFile" name="source_file" value="">
+              <button class="btn" type="submit" id="submitBtn">Submit Acknowledgement</button>
 
-                <button class="btn" type="submit">Submit Acknowledgement</button>
-              </form>
+              <!-- You asked: do NOT show “Netlify handles …” to the user -->
+              <div class="smallNote">
+                If you accidentally submit twice, notify your supervisor — do not resubmit.
+              </div>
+            </form>
 
-            </div>
-          </section>
+          </div>
+        </section>
 
-        </div>
       </div>
     </div>
 
-    <div class="footer">© OBC • Weekly Toolbox Talks</div>
-
+    <div class="foot">© OBC • Weekly Toolbox Talks</div>
   </div>
 
-  <script>
-    // Show only ONE banner at the top based on URL params.
-    (function(){
-      const ok = document.getElementById("bannerOk");
-      const err = document.getElementById("bannerErr");
-      ok.style.display = "none";
-      err.style.display = "none";
+<script>
+  // --- Show green banner when redirected back with ?submitted=true
+  (function () {
+    const params = new URLSearchParams(window.location.search);
+    const banner = document.getElementById('banner');
+    const statusChip = document.getElementById('statusChip');
 
-      const params = new URLSearchParams(location.search);
-      if (params.get("submitted") === "1") {
-        ok.style.display = "block";
-        const pill = document.getElementById("statusPill");
-        pill.style.display = "inline-flex";
-        // remove the query so refresh doesn't keep showing it
-        history.replaceState({}, "", location.pathname);
-      }
-      if (params.get("error") === "1") {
-        err.style.display = "block";
-        history.replaceState({}, "", location.pathname);
-      }
-    })();
+    if (params.get('submitted') === 'true') {
+      banner.style.display = 'block';
+      statusChip.textContent = 'Submitted';
+      statusChip.style.borderColor = 'rgba(46, 204, 113, .55)';
+      statusChip.style.background = 'rgba(46, 204, 113, .12)';
 
-    // Load current talk metadata & markdown file path from talks/current.json
-    // Folder structure you have:
-    // /talks/current.json
-    // /talks/2026-01-12-housekeeping-trip-hazards.md
-    async function loadTalk(){
-      const currentUrl = "/talks/current.json";
-      const mdContainer = document.getElementById("talkBody");
-
-      try{
-        const metaRes = await fetch(currentUrl, { cache: "no-store" });
-        if(!metaRes.ok) throw new Error("Could not load current.json");
-        const meta = await metaRes.json();
-
-        const title = meta.title || "Weekly Toolbox Talk";
-        const week = meta.week_of || "";
-        const area = meta.area || "";
-        const file = meta.file || "";
-
-        document.getElementById("talkTitleTop").textContent = title;
-        document.getElementById("talkSubTop").textContent = `${week} • ${area}`;
-        document.getElementById("talkWeek").textContent = week;
-        document.getElementById("talkArea").textContent = area;
-
-        // Fill hidden fields so Netlify stores what talk they acknowledged
-        document.getElementById("metaTitle").value = title;
-        document.getElementById("metaWeek").value = week;
-        document.getElementById("metaArea").value = area;
-        document.getElementById("metaFile").value = file;
-
-        if(!file){
-          mdContainer.textContent = "No talk file configured in current.json.";
-          return;
-        }
-
-        const mdRes = await fetch(`/talks/${file}`, { cache: "no-store" });
-        if(!mdRes.ok) throw new Error("Could not load talk markdown");
-        const mdText = await mdRes.text();
-
-        // Minimal markdown renderer: headings + bullets + paragraphs.
-        // (Keeps it simple and reliable with no external libraries.)
-        mdContainer.innerHTML = renderBasicMarkdown(mdText);
-
-      } catch(e){
-        mdContainer.innerHTML = `<p style="color:rgba(254,226,226,.95);">
-          Could not load this week’s talk. Please refresh, or try again.
-        </p>`;
-        // Optional: show top error banner if talk load fails
-        const err = document.getElementById("bannerErr");
-        err.style.display = "block";
-      }
+      // Clean the URL (so refresh doesn’t keep showing the banner forever)
+      const cleanUrl = window.location.pathname;
+      window.history.replaceState({}, document.title, cleanUrl);
     }
+  })();
 
-    function escapeHtml(s){
-      return s.replace(/[&<>"']/g, m => ({
-        "&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;"
-      }[m]));
-    }
+  // --- Tiny markdown-ish renderer (safe-ish for your controlled content)
+  function renderBasicMarkdown(mdText) {
+    // escape HTML
+    let s = mdText
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;");
 
-    function renderBasicMarkdown(md){
-      const lines = md.replace(/\r\n/g, "\n").split("\n");
-      let html = "";
-      let inList = false;
+    // headings
+    s = s.replace(/^###\s+(.*)$/gm, "<h3>$1</h3>");
+    s = s.replace(/^##\s+(.*)$/gm, "<h2>$1</h2>");
+    s = s.replace(/^#\s+(.*)$/gm, "<h1>$1</h1>");
 
-      const closeList = () => {
-        if(inList){ html += "</ul>"; inList = false; }
-      };
+    // bold
+    s = s.replace(/\*\*(.+?)\*\*/g, "<b>$1</b>");
 
-      for(const raw of lines){
-        const line = raw.trim();
+    // unordered lists
+    // convert lines starting with "- " into <li>
+    s = s.replace(/^\s*-\s+(.*)$/gm, "<li>$1</li>");
+    // wrap consecutive <li> blocks into <ul>
+    s = s.replace(/(?:<li>.*<\/li>\s*)+/g, (m) => "<ul>" + m + "</ul>");
 
-        if(!line){
-          closeList();
-          continue;
-        }
+    // paragraphs: split by blank lines
+    const blocks = s.split(/\n\s*\n/).map(b => b.trim()).filter(Boolean);
+    s = blocks.map(b => {
+      // if already block-level, keep it
+      if (b.startsWith("<h") || b.startsWith("<ul>")) return b;
+      // convert single line breaks to <br>
+      b = b.replace(/\n/g, "<br>");
+      return "<p>" + b + "</p>";
+    }).join("\n");
 
-        // Headings
-        if(line.startsWith("### ")){
-          closeList();
-          html += `<h3>${escapeHtml(line.slice(4))}</h3>`;
-          continue;
-        }
-        if(line.startsWith("## ")){
-          closeList();
-          html += `<h2>${escapeHtml(line.slice(3))}</h2>`;
-          continue;
-        }
-        if(line.startsWith("# ")){
-          closeList();
-          html += `<h2>${escapeHtml(line.slice(2))}</h2>`;
-          continue;
-        }
+    return s;
+  }
 
-        // Bullets
-        if(line.startsWith("- ") || line.startsWith("• ")){
-          if(!inList){ html += "<ul>"; inList = true; }
-          html += `<li>${escapeHtml(line.slice(2))}</li>`;
-          continue;
-        }
+  async function loadCurrentTalk() {
+    const talkTitleTop = document.getElementById('talkTitleTop');
+    const talkMetaTop  = document.getElementById('talkMetaTop');
+    const talkTitleH2  = document.getElementById('talkTitleH2');
+    const weekOfEl     = document.getElementById('weekOf');
+    const areaEl       = document.getElementById('area');
+    const mdEl         = document.getElementById('md');
 
-        closeList();
-        html += `<p>${escapeHtml(line)}</p>`;
+    // hidden form fields
+    const fTitle = document.getElementById('f_talk_title');
+    const fWeek  = document.getElementById('f_talk_week_of');
+    const fArea  = document.getElementById('f_talk_area');
+    const fFile  = document.getElementById('f_talk_file');
+
+    try {
+      // Your repo file: /talks/current.json
+      const curRes = await fetch('/talks/current.json', { cache: 'no-store' });
+      if (!curRes.ok) throw new Error('Could not load current.json');
+      const cur = await curRes.json();
+
+      const title = cur.title || 'Weekly Toolbox Talk';
+      const week_of = cur.week_of || '';
+      const area = cur.area || '';
+      const file = cur.file || '';
+
+      talkTitleTop.textContent = title;
+      talkMetaTop.textContent = (week_of ? week_of : '—') + (area ? ' • ' + area : '');
+      talkTitleH2.textContent = title;
+      weekOfEl.textContent = week_of || '—';
+      areaEl.textContent = area || '—';
+
+      // fill hidden form fields so the submission includes the talk info
+      fTitle.value = title;
+      fWeek.value  = week_of;
+      fArea.value  = area;
+      fFile.value  = file;
+
+      if (!file) {
+        mdEl.textContent = 'No talk file defined in current.json.';
+        return;
       }
 
-      closeList();
-      return html;
-    }
+      // Your repo file: /talks/<filename>.md
+      const mdRes = await fetch('/talks/' + file, { cache: 'no-store' });
+      if (!mdRes.ok) throw new Error('Could not load talk markdown');
+      const mdText = await mdRes.text();
 
-    loadTalk();
-  </script>
+      mdEl.innerHTML = renderBasicMarkdown(mdText);
+
+    } catch (err) {
+      talkTitleTop.textContent = 'Toolbox Talk';
+      talkMetaTop.textContent = 'Could not load weekly talk.';
+      talkTitleH2.textContent = 'Toolbox Talk';
+      weekOfEl.textContent = '—';
+      areaEl.textContent = '—';
+      mdEl.textContent = 'Error loading talk content. Please contact supervisor.';
+      console.error(err);
+    }
+  }
+
+  loadCurrentTalk();
+</script>
+
 </body>
 </html>
