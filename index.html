@@ -3,29 +3,24 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
   <title>OBC Weekly Toolbox Talk</title>
-  <meta name="description" content="OBC Weekly Toolbox Talk – Read and acknowledge." />
-
-  <!-- Cache-busting (best effort). Netlify can still cache, but we also fetch() with no-store below. -->
-  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
-  <meta http-equiv="Pragma" content="no-cache" />
-  <meta http-equiv="Expires" content="0" />
+  <meta name="description" content="OBC Weekly Toolbox Talk acknowledgement page" />
 
   <style>
     :root{
       --bg1:#0b1220;
       --bg2:#0f1a30;
+      --card1: rgba(17,28,52,.85);
+      --card2: rgba(16,26,48,.65);
       --ink:#eaf0ff;
       --muted:#b7c4e0;
       --accent:#5bc0be;
+      --accent2:#7aa7ff;
+      --good:#22c55e;
+      --warn:#f59e0b;
+      --bad:#ef4444;
       --shadow: 0 18px 45px rgba(0,0,0,.45);
       --radius: 18px;
-      --card1: rgba(17,28,52,.85);
-      --card2: rgba(16,26,48,.65);
-      --border: rgba(255,255,255,.10);
-      --good: rgba(70, 200, 140, .18);
-      --bad: rgba(255, 90, 90, .18);
     }
 
     *{ box-sizing:border-box; }
@@ -40,38 +35,42 @@
         linear-gradient(180deg, var(--bg1), var(--bg2));
       min-height:100vh;
       display:flex;
-      align-items:flex-start;
+      align-items:center;
       justify-content:center;
-      padding:22px 14px;
+      padding:26px 18px;
     }
 
     .wrap{ width:min(1200px, 100%); }
 
     .header{
       display:flex;
-      align-items:flex-start;
+      align-items:center;
       justify-content:space-between;
       gap:14px;
       flex-wrap:wrap;
       margin-bottom:14px;
     }
 
-    .titleBlock{ display:flex; gap:14px; align-items:flex-start; }
+    .titleBlock{
+      display:flex;
+      gap:14px;
+      align-items:center;
+      min-width: 260px;
+    }
 
     .badge{
-      width:48px; height:48px;
+      width:48px;
+      height:48px;
       border-radius:14px;
       background: linear-gradient(135deg, rgba(91,192,190,.95), rgba(122,167,255,.85));
       box-shadow: 0 12px 28px rgba(0,0,0,.35);
       flex:0 0 auto;
-      margin-top:2px;
     }
 
     h1{
       margin:0;
       font-size: clamp(22px, 3vw, 34px);
       line-height:1.15;
-      letter-spacing: .2px;
     }
 
     .sub{
@@ -88,11 +87,54 @@
       border:1px solid rgba(255,255,255,.10);
       background: rgba(10,16,30,.45);
       white-space:nowrap;
-      align-self:center;
     }
 
+    /* Top success banner (like your training modules) */
+    .banner{
+      display:none;
+      margin: 10px 0 14px 0;
+      padding: 12px 14px;
+      border-radius: 14px;
+      border: 1px solid rgba(34,197,94,.40);
+      background: rgba(34,197,94,.16);
+      color: rgba(234,240,255,.98);
+      box-shadow: 0 14px 28px rgba(0,0,0,.25);
+      align-items:center;
+      justify-content:space-between;
+      gap:10px;
+    }
+    .banner.show{ display:flex; }
+    .banner .left{
+      display:flex;
+      gap:10px;
+      align-items:center;
+      min-width: 0;
+    }
+    .dot{
+      width:10px;height:10px;border-radius:999px;
+      background: var(--good);
+      box-shadow: 0 0 0 4px rgba(34,197,94,.18);
+      flex:0 0 auto;
+    }
+    .banner .msg{
+      font-size: 14px;
+      color: rgba(234,240,255,.96);
+      white-space:nowrap;
+      overflow:hidden;
+      text-overflow:ellipsis;
+    }
+    .banner button{
+      border:1px solid rgba(255,255,255,.16);
+      background: rgba(255,255,255,.08);
+      color: rgba(234,240,255,.92);
+      border-radius: 999px;
+      padding: 8px 12px;
+      cursor:pointer;
+    }
+    .banner button:hover{ border-color: rgba(91,192,190,.35); }
+
     .panel{
-      border:1px solid var(--border);
+      border:1px solid rgba(255,255,255,.10);
       border-radius: var(--radius);
       background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03));
       box-shadow: var(--shadow);
@@ -103,187 +145,163 @@
 
     .grid{
       display:grid;
-      grid-template-columns: 1.35fr .85fr;
+      grid-template-columns: 1.25fr .85fr;
       gap:14px;
-      align-items:stretch;
     }
 
     .card{
       border-radius:16px;
-      border:1px solid var(--border);
+      border:1px solid rgba(255,255,255,.10);
       background: linear-gradient(180deg, var(--card1), var(--card2));
       box-shadow: 0 14px 28px rgba(0,0,0,.25);
       overflow:hidden;
-      min-height: 420px;
+      min-height: 240px;
     }
 
-    .cardHeader{
-      padding:14px 16px;
-      border-bottom:1px solid rgba(255,255,255,.08);
+    .cardHead{
       display:flex;
       align-items:flex-start;
       justify-content:space-between;
       gap:10px;
-    }
-
-    .cardHeader h2{
-      margin:0;
-      font-size: 18px;
+      padding:16px 16px 12px 16px;
+      border-bottom:1px solid rgba(255,255,255,.08);
     }
 
     .pill{
       font-size:12px;
-      padding:6px 10px;
+      padding:7px 12px;
       border-radius:999px;
-      border:1px solid rgba(255,255,255,.16);
+      border:1px solid rgba(255,255,255,.14);
       background: rgba(255,255,255,.06);
-      color: rgba(234,240,255,.95);
+      color: rgba(234,240,255,.92);
       white-space:nowrap;
       flex:0 0 auto;
     }
 
-    .subline{
-      margin-top:6px;
-      color: var(--muted);
-      font-size: 13px;
+    .talkTitle{
+      margin:0;
+      font-size:18px;
+      line-height:1.2;
+    }
+
+    .talkSub{
+      margin:6px 0 0 0;
+      color:var(--muted);
+      font-size:13px;
     }
 
     .cardBody{
       padding:16px;
     }
 
-    /* Talk body: scrollable on desktop, natural flow on mobile */
-    .talkScroll{
-      max-height: 62vh;
-      overflow:auto;
-      padding-right:8px;
-    }
-    .talkScroll::-webkit-scrollbar{ width:10px; }
-    .talkScroll::-webkit-scrollbar-thumb{
-      background: rgba(255,255,255,.12);
-      border-radius: 10px;
-      border: 2px solid rgba(0,0,0,0);
-      background-clip: padding-box;
-    }
-
-    .talkTitle{
-      margin:0 0 10px 0;
-      font-size: 22px;
-      line-height:1.2;
-    }
-
-    .kv{
-      margin: 10px 0 14px 0;
+    .talkMeta{
       display:grid;
       gap:6px;
-      color: rgba(234,240,255,.95);
-      font-size:14px;
-    }
-    .kv b{ color: rgba(234,240,255,.95); }
-
-    .md{
-      color: rgba(234,240,255,.95);
-      font-size:14px;
-      line-height:1.5;
-    }
-    .md h1,.md h2,.md h3{
-      margin: 16px 0 8px 0;
-      line-height:1.2;
-    }
-    .md h2{ font-size:16px; }
-    .md h3{ font-size:15px; color: rgba(234,240,255,.92); }
-    .md p{ margin: 10px 0; color: rgba(234,240,255,.92); }
-    .md ul{ margin: 8px 0 12px 18px; }
-    .md li{ margin: 6px 0; color: rgba(234,240,255,.92); }
-    .md hr{
-      border:0;
-      height:1px;
-      background: rgba(255,255,255,.10);
-      margin: 14px 0;
-    }
-
-    .formRow{
-      display:flex;
-      flex-direction:column;
-      gap:10px;
-      margin-top: 8px;
-    }
-
-    label{
-      font-size: 13px;
-      color: var(--muted);
-    }
-
-    input[type="text"]{
-      width:100%;
-      padding:12px 12px;
-      border-radius: 12px;
-      border: 1px solid rgba(255,255,255,.14);
-      background: rgba(255,255,255,.06);
-      color: var(--ink);
-      outline:none;
+      margin-bottom: 12px;
+      color: rgba(234,240,255,.94);
       font-size: 14px;
     }
-    input[type="text"]::placeholder{ color: rgba(183,196,224,.75); }
-    input[type="text"]:focus{
-      border-color: rgba(91,192,190,.45);
-      box-shadow: 0 0 0 3px rgba(91,192,190,.12);
+    .talkMeta b{ color: rgba(234,240,255,.98); }
+
+    .md{
+      max-height: 560px;
+      overflow:auto;
+      padding-right: 8px;
+    }
+    .md h1,.md h2,.md h3{ margin: 14px 0 8px 0; }
+    .md h1{ font-size: 20px; }
+    .md h2{ font-size: 17px; }
+    .md h3{ font-size: 15px; color: rgba(234,240,255,.95); }
+    .md p, .md li{
+      color: rgba(234,240,255,.92);
+      line-height: 1.45;
+      font-size: 14px;
+    }
+    .md ul{ margin: 8px 0 12px 18px; }
+    .md hr{
+      border: none;
+      border-top: 1px solid rgba(255,255,255,.10);
+      margin: 14px 0;
+    }
+    .md code{
+      background: rgba(255,255,255,.08);
+      padding: 2px 6px;
+      border-radius: 8px;
     }
 
+    /* Acknowledgement */
+    .fieldLabel{
+      font-size: 12px;
+      color: var(--muted);
+      margin: 10px 0 6px 0;
+    }
+    .input{
+      width:100%;
+      border-radius: 12px;
+      border: 1px solid rgba(255,255,255,.12);
+      background: rgba(235,245,255,.92);
+      color: #0b1220;
+      padding: 12px 12px;
+      font-size: 14px;
+      outline: none;
+    }
+    .input:focus{ border-color: rgba(91,192,190,.55); box-shadow: 0 0 0 4px rgba(91,192,190,.18); }
+
     .checkRow{
+      margin-top: 10px;
       display:flex;
       gap:10px;
       align-items:flex-start;
-      padding:10px 10px;
+      padding: 10px 12px;
       border-radius: 12px;
       border: 1px solid rgba(255,255,255,.10);
-      background: rgba(255,255,255,.04);
+      background: rgba(255,255,255,.05);
     }
-    .checkRow input{ margin-top:2px; transform: scale(1.05); }
+    .checkRow input{ margin-top: 3px; }
+    .checkRow label{
+      font-size: 13px;
+      line-height: 1.35;
+      color: rgba(234,240,255,.92);
+      cursor:pointer;
+    }
 
     .btn{
+      margin-top: 12px;
       width:100%;
       border:none;
       border-radius: 12px;
-      padding:12px 14px;
-      background: linear-gradient(90deg, rgba(91,192,190,.95), rgba(122,167,255,.85));
-      color: #071221;
+      padding: 12px 14px;
+      font-size: 14px;
       font-weight: 700;
       cursor:pointer;
-      font-size: 14px;
-      letter-spacing: .2px;
-      box-shadow: 0 16px 28px rgba(0,0,0,.25);
+      color: #06101f;
+      background: linear-gradient(90deg, rgba(91,192,190,.95), rgba(122,167,255,.92));
+      box-shadow: 0 14px 28px rgba(0,0,0,.25);
     }
     .btn:disabled{
-      opacity:.55;
-      cursor:not-allowed;
+      opacity: .65;
+      cursor: not-allowed;
+      box-shadow:none;
     }
 
-    .msg{
-      margin-top:10px;
-      padding:10px 12px;
-      border-radius: 12px;
-      border: 1px solid rgba(255,255,255,.10);
-      background: rgba(255,255,255,.04);
-      font-size: 13px;
-      color: rgba(234,240,255,.92);
-      display:none;
+    .smallHint{
+      margin-top: 10px;
+      font-size: 12px;
+      color: rgba(183,196,224,.88);
+      text-align:center;
     }
-    .msg.ok{ display:block; border-color: rgba(70, 200, 140, .25); background: var(--good); }
-    .msg.bad{ display:block; border-color: rgba(255, 90, 90, .25); background: var(--bad); }
 
     .footer{
-      margin-top:12px;
+      margin-top: 10px;
       text-align:center;
       font-size:12px;
       color: rgba(183,196,224,.85);
     }
 
     /* Mobile */
-    @media (max-width: 940px){
+    @media (max-width: 980px){
       .grid{ grid-template-columns: 1fr; }
-      .card{ min-height: auto; }
-      .talkScroll{ max-height: none; overflow: visible; padding-right:0; }
+      .md{ max-height: 420px; }
       .meta{ width:100%; text-align:center; }
     }
   </style>
@@ -302,314 +320,364 @@
       <div class="meta">Internal Use • OSHA-Themed</div>
     </div>
 
+    <!-- Green success banner (shows after submit) -->
+    <div id="successBanner" class="banner" role="status" aria-live="polite">
+      <div class="left">
+        <div class="dot"></div>
+        <div id="successMsg" class="msg">Thank you — submitted.</div>
+      </div>
+      <button type="button" id="bannerDismiss">Dismiss</button>
+    </div>
+
     <div class="panel">
       <div class="panelInner">
         <div class="grid">
 
-          <!-- LEFT: Talk -->
-          <section class="card" aria-label="Toolbox talk content">
-            <div class="cardHeader">
+          <!-- LEFT: Toolbox Talk -->
+          <div class="card">
+            <div class="cardHead">
               <div>
-                <h2 id="talkHeaderTitle">Loading…</h2>
-                <div class="subline" id="talkHeaderMeta">Please wait.</div>
+                <h2 class="talkTitle" id="talkHeaderTitle">Loading this week’s talk…</h2>
+                <p class="talkSub" id="talkHeaderSub">Please wait.</p>
               </div>
-              <span class="pill">Toolbox Talk</span>
+              <div class="pill">Toolbox Talk</div>
             </div>
 
             <div class="cardBody">
-              <div class="talkScroll">
-                <h3 class="talkTitle" id="talkTitle">Loading…</h3>
+              <div class="talkMeta" id="talkMeta" style="display:none;">
+                <div><b>Week of:</b> <span id="weekOf"></span></div>
+                <div><b>Applies to:</b> <span id="area"></span></div>
+              </div>
 
-                <div class="kv" aria-label="Talk details">
-                  <div><b>Week of:</b> <span id="talkWeekOf">—</span></div>
-                  <div><b>Applies to:</b> <span id="talkArea">—</span></div>
-                </div>
-
-                <div class="md" id="talkBody">
-                  Loading the talk text…
-                </div>
+              <div class="md" id="talkContent">
+                <!-- Markdown content renders here -->
               </div>
             </div>
-          </section>
+          </div>
 
           <!-- RIGHT: Acknowledgement -->
-          <section class="card" aria-label="Acknowledgement form">
-            <div class="cardHeader">
+          <div class="card">
+            <div class="cardHead">
               <div>
-                <h2>Acknowledgement</h2>
-                <div class="subline">Enter your name and confirm you read this talk.</div>
+                <h2 class="talkTitle">Acknowledgement</h2>
+                <p class="talkSub">Enter your name and confirm you read this talk.</p>
               </div>
-              <span class="pill">Submit</span>
+              <div class="pill" id="statusPill">Ready</div>
             </div>
 
             <div class="cardBody">
+              <!-- IMPORTANT: Netlify needs a form it can “see” at build time.
+                   This hidden form is harmless, but ensures Netlify registers the form name. -->
+              <form name="toolbox-ack" data-netlify="true" netlify-honeypot="bot-field" hidden>
+                <input name="bot-field" />
+                <input type="text" name="employee_name" />
+                <input type="text" name="talk_title" />
+                <input type="text" name="week_of" />
+                <input type="text" name="area" />
+                <input type="text" name="email_subject" />
+                <input type="checkbox" name="acknowledged" />
+              </form>
 
-              <!-- Netlify form: MUST be present in HTML for Netlify to detect it -->
-              <form id="ackForm"
-                    name="toolbox-ack"
-                    method="POST"
-                    data-netlify="true"
-                    netlify-honeypot="bot-field">
-                <!-- Required hidden form name -->
+              <!-- Visible form -->
+              <form id="ackForm" name="toolbox-ack" method="POST" data-netlify="true" netlify-honeypot="bot-field">
                 <input type="hidden" name="form-name" value="toolbox-ack" />
-
-                <!-- Honeypot (spam trap) -->
                 <p style="display:none;">
                   <label>Don’t fill this out: <input name="bot-field" /></label>
                 </p>
 
-                <!-- Hidden fields used for the email subject + record -->
-                <input type="hidden" name="talk_title" id="f_talk_title" value="" />
-                <input type="hidden" name="talk_week_of" id="f_talk_week_of" value="" />
-                <input type="hidden" name="talk_area" id="f_talk_area" value="" />
-                <input type="hidden" name="email_subject" id="f_email_subject" value="" />
-                <input type="hidden" name="talk_file" id="f_talk_file" value="" />
+                <div class="fieldLabel">Employee name</div>
+                <input class="input" id="employeeName" name="employee_name" type="text" placeholder="Type your full name" autocomplete="name" required />
 
-                <div class="formRow">
-                  <div>
-                    <label for="employeeName">Employee name</label>
-                    <input id="employeeName" name="employee_name" type="text" placeholder="Type your first and last name" autocomplete="name" required />
-                  </div>
-
-                  <div class="checkRow">
-                    <input id="ackCheck" name="acknowledged" type="checkbox" value="YES" required />
-                    <label for="ackCheck" style="margin:0; color: rgba(234,240,255,.92);">
-                      I have read and understand this toolbox talk and will follow the safety requirements.
-                    </label>
-                  </div>
-
-                  <button class="btn" id="submitBtn" type="submit" disabled>Submit Acknowledgement</button>
-
-                  <div class="msg ok" id="msgOk">Submitted. Thank you.</div>
-                  <div class="msg bad" id="msgBad">Could not submit. Please try again (or check signal).</div>
+                <div class="checkRow">
+                  <input id="ackCheck" name="acknowledged" type="checkbox" required />
+                  <label for="ackCheck">
+                    I have read and understand this toolbox talk and will follow the safety requirements.
+                  </label>
                 </div>
-              </form>
 
+                <!-- These fields get filled automatically from current.json -->
+                <input type="hidden" id="talkTitleField" name="talk_title" />
+                <input type="hidden" id="weekOfField" name="week_of" />
+                <input type="hidden" id="areaField" name="area" />
+                <input type="hidden" id="subjectField" name="email_subject" />
+
+                <button class="btn" id="submitBtn" type="submit">Submit Acknowledgement</button>
+                <div class="smallHint" id="hintText">Your acknowledgement will be recorded.</div>
+              </form>
             </div>
-          </section>
+          </div>
 
         </div>
-
-        <div class="footer">© OBC • Weekly Toolbox Talks</div>
       </div>
     </div>
+
+    <div class="footer">© OBC • Weekly Toolbox Talks</div>
   </div>
 
   <script>
-    // --- Simple markdown renderer (safe subset) ---
-    // Supports: headings (#, ##, ###), bullets (- / *), paragraphs, blank lines, horizontal rule (---)
-    // We keep it intentionally "rugged" and low-risk (no HTML passthrough).
-    function escapeHtml(s){
-      return s.replace(/[&<>"']/g, (c) => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+    // === CONFIG ===
+    // These files live in your repo under /talks/
+    const CURRENT_JSON_URL = "/talks/current.json"; // points to talks/current.json
+    // The JSON contains: { title, week_of, area, file }
+
+    const el = (id) => document.getElementById(id);
+
+    const successBanner = el("successBanner");
+    const successMsg = el("successMsg");
+    const bannerDismiss = el("bannerDismiss");
+    const statusPill = el("statusPill");
+    const submitBtn = el("submitBtn");
+    const hintText = el("hintText");
+
+    const talkHeaderTitle = el("talkHeaderTitle");
+    const talkHeaderSub = el("talkHeaderSub");
+    const talkMeta = el("talkMeta");
+    const weekOf = el("weekOf");
+    const area = el("area");
+    const talkContent = el("talkContent");
+
+    const talkTitleField = el("talkTitleField");
+    const weekOfField = el("weekOfField");
+    const areaField = el("areaField");
+    const subjectField = el("subjectField");
+
+    let currentTalk = null;
+
+    function escapeHtml(str){
+      return (str || "").replace(/[&<>"']/g, (m) => ({
+        "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"
+      }[m]));
     }
 
+    // Very lightweight markdown renderer (headings, bullets, paragraphs, bold)
     function renderMarkdown(md){
-      const lines = md.replace(/\r\n/g, "\n").split("\n");
+      const lines = (md || "").replace(/\r\n/g,"\n").split("\n");
       let html = "";
       let inList = false;
 
-      const closeList = () => { if(inList){ html += "</ul>"; inList = false; } };
+      const flushList = () => {
+        if(inList){ html += "</ul>"; inList = false; }
+      };
 
       for(const raw of lines){
-        const line = raw.trimRight();
+        const line = raw.trimEnd();
 
         if(line.trim() === ""){
-          closeList();
+          flushList();
+          html += "<div style='height:8px'></div>";
           continue;
         }
 
-        if(line.trim() === "---"){
-          closeList();
-          html += "<hr>";
+        if(/^---+$/.test(line.trim())){
+          flushList();
+          html += "<hr />";
           continue;
         }
 
         // Headings
-        if(/^###\s+/.test(line)){
-          closeList();
-          html += "<h3>" + escapeHtml(line.replace(/^###\s+/, "")) + "</h3>";
+        if(line.startsWith("### ")){
+          flushList();
+          html += "<h3>" + escapeHtml(line.slice(4)) + "</h3>";
           continue;
         }
-        if(/^##\s+/.test(line)){
-          closeList();
-          html += "<h2>" + escapeHtml(line.replace(/^##\s+/, "")) + "</h2>";
+        if(line.startsWith("## ")){
+          flushList();
+          html += "<h2>" + escapeHtml(line.slice(3)) + "</h2>";
           continue;
         }
-        if(/^#\s+/.test(line)){
-          closeList();
-          html += "<h1>" + escapeHtml(line.replace(/^#\s+/, "")) + "</h1>";
+        if(line.startsWith("# ")){
+          flushList();
+          html += "<h1>" + escapeHtml(line.slice(2)) + "</h1>";
           continue;
         }
 
         // Bullets
-        if(/^[-*]\s+/.test(line)){
+        if(/^\-\s+/.test(line) || /^\*\s+/.test(line)){
           if(!inList){ html += "<ul>"; inList = true; }
-          html += "<li>" + escapeHtml(line.replace(/^[-*]\s+/, "")) + "</li>";
+          const item = line.replace(/^\-\s+|^\*\s+/,"");
+          html += "<li>" + escapeInlineMd(item) + "</li>";
           continue;
         }
 
         // Paragraph
-        closeList();
-        html += "<p>" + escapeHtml(line) + "</p>";
+        flushList();
+        html += "<p>" + escapeInlineMd(line) + "</p>";
       }
 
-      closeList();
-      return html || "<p>(No content)</p>";
+      flushList();
+      return html;
     }
 
-    // --- Cache-safe fetch helper ---
-    function cacheBuster(){
-      return "t=" + Date.now();
+    function escapeInlineMd(text){
+      let t = escapeHtml(text);
+
+      // bold **text**
+      t = t.replace(/\*\*(.+?)\*\*/g, "<b>$1</b>");
+      // inline code `code`
+      t = t.replace(/`(.+?)`/g, "<code>$1</code>");
+      return t;
     }
 
-    async function fetchTextNoStore(url){
-      const sep = url.includes("?") ? "&" : "?";
-      const res = await fetch(url + sep + cacheBuster(), { cache: "no-store" });
-      if(!res.ok) throw new Error("Fetch failed: " + url);
-      return await res.text();
-    }
-
-    async function fetchJsonNoStore(url){
-      const sep = url.includes("?") ? "&" : "?";
-      const res = await fetch(url + sep + cacheBuster(), {
-        cache: "no-store",
-        headers: { "Accept": "application/json" }
-      });
-      if(!res.ok) throw new Error("Fetch failed: " + url);
-      return await res.json();
-    }
-
-    // --- Load talk definition + markdown ---
-    const talkHeaderTitle = document.getElementById("talkHeaderTitle");
-    const talkHeaderMeta  = document.getElementById("talkHeaderMeta");
-
-    const talkTitle  = document.getElementById("talkTitle");
-    const talkWeekOf = document.getElementById("talkWeekOf");
-    const talkArea   = document.getElementById("talkArea");
-    const talkBody   = document.getElementById("talkBody");
-
-    const fTitle  = document.getElementById("f_talk_title");
-    const fWeek   = document.getElementById("f_talk_week_of");
-    const fArea   = document.getElementById("f_talk_area");
-    const fSubj   = document.getElementById("f_email_subject");
-    const fFile   = document.getElementById("f_talk_file");
-
-    const employeeName = document.getElementById("employeeName");
-    const ackCheck     = document.getElementById("ackCheck");
-    const submitBtn    = document.getElementById("submitBtn");
-
-    const msgOk  = document.getElementById("msgOk");
-    const msgBad = document.getElementById("msgBad");
-
-    function setSubmitEnabled(){
-      const ok = employeeName.value.trim().length > 1 && ackCheck.checked;
-      submitBtn.disabled = !ok;
-    }
-    employeeName.addEventListener("input", setSubmitEnabled);
-    ackCheck.addEventListener("change", setSubmitEnabled);
-
-    function buildEmailSubject(title, weekOf, name){
-      // Long version you requested:
-      // Toolbox Talk Acknowledgement – <Talk> – <Date> – <Name>
-      return `Toolbox Talk Acknowledgement – ${title} – ${weekOf} – ${name}`;
-    }
-
-    function setTalkUI(t){
-      const title = (t.title || "Weekly Toolbox Talk").trim();
-      const weekOf = (t.week_of || "").trim();
-      const area = (t.area || "Field & Shop").trim();
-      const file = (t.file || "").trim();
-
-      talkHeaderTitle.textContent = title;
-      talkHeaderMeta.textContent  = `${weekOf} • ${area}`;
-
-      talkTitle.textContent = title;
-      talkWeekOf.textContent = weekOf || "—";
-      talkArea.textContent = area || "—";
-
-      // Hidden fields for submissions
-      fTitle.value = title;
-      fWeek.value  = weekOf;
-      fArea.value  = area;
-      fFile.value  = file;
-
-      // Update subject whenever the name changes
-      const refreshSubject = () => {
-        const name = employeeName.value.trim() || "Employee";
-        fSubj.value = buildEmailSubject(title, weekOf, name);
-      };
-      employeeName.addEventListener("input", refreshSubject);
-      refreshSubject();
-    }
-
-    async function loadTalk(){
-      try{
-        // Reads talks/current.json, which points to the actual weekly markdown file.
-        const talk = await fetchJsonNoStore("/talks/current.json");
-        setTalkUI(talk);
-
-        if(!talk.file){
-          talkBody.innerHTML = "<p><b>Error:</b> current.json is missing the <code>file</code> field.</p>";
-          return;
-        }
-
-        // Markdown is stored in /talks/<filename>.md
-        const md = await fetchTextNoStore("/talks/" + talk.file);
-        talkBody.innerHTML = renderMarkdown(md);
-      }catch(err){
-        console.error(err);
-        talkHeaderTitle.textContent = "Could not load talk";
-        talkHeaderMeta.textContent = "Check connection / deploy status";
-        talkTitle.textContent = "Could not load talk";
-        talkWeekOf.textContent = "—";
-        talkArea.textContent = "—";
-        talkBody.innerHTML = "<p><b>Could not load.</b> Please refresh and try again.</p>";
+    function setPill(state){
+      // state: "Ready" | "Loading" | "Submitted" | "Error"
+      statusPill.textContent = state;
+      if(state === "Submitted"){
+        statusPill.style.borderColor = "rgba(34,197,94,.45)";
+        statusPill.style.background = "rgba(34,197,94,.16)";
+      }else if(state === "Loading"){
+        statusPill.style.borderColor = "rgba(245,158,11,.45)";
+        statusPill.style.background = "rgba(245,158,11,.14)";
+      }else if(state === "Error"){
+        statusPill.style.borderColor = "rgba(239,68,68,.45)";
+        statusPill.style.background = "rgba(239,68,68,.14)";
+      }else{
+        statusPill.style.borderColor = "rgba(255,255,255,.14)";
+        statusPill.style.background = "rgba(255,255,255,.06)";
       }
     }
 
-    // --- Form submission (AJAX) ---
-    // We submit as x-www-form-urlencoded to Netlify. This prevents opening any email client.
-    function encode(data){
-      return new URLSearchParams(data).toString();
+    function showSuccessBanner(message){
+      successMsg.textContent = message || "Thank you — submitted.";
+      successBanner.classList.add("show");
+      // auto-scroll to top so they see it (especially on phones)
+      window.scrollTo({ top: 0, behavior: "smooth" });
     }
 
-    document.getElementById("ackForm").addEventListener("submit", async (e) => {
+    bannerDismiss.addEventListener("click", () => {
+      successBanner.classList.remove("show");
+    });
+
+    async function loadCurrentTalk(){
+      setPill("Loading");
+      talkHeaderTitle.textContent = "Loading this week’s talk…";
+      talkHeaderSub.textContent = "Please wait.";
+      talkMeta.style.display = "none";
+      talkContent.innerHTML = "<p>Loading…</p>";
+
+      const res = await fetch(CURRENT_JSON_URL, { cache: "no-store" });
+      if(!res.ok) throw new Error("Could not load current.json");
+      const data = await res.json();
+
+      // Expected: { title, week_of, area, file }
+      if(!data || !data.title || !data.week_of || !data.area || !data.file){
+        throw new Error("current.json is missing required fields.");
+      }
+
+      currentTalk = data;
+
+      // Header
+      talkHeaderTitle.textContent = data.title;
+      talkHeaderSub.textContent = `${data.week_of} • ${data.area}`;
+
+      // Meta
+      weekOf.textContent = data.week_of;
+      area.textContent = data.area;
+      talkMeta.style.display = "grid";
+
+      // Fill hidden form fields
+      talkTitleField.value = data.title;
+      weekOfField.value = data.week_of;
+      areaField.value = data.area;
+
+      // Load markdown talk file
+      const mdUrl = "/talks/" + data.file;
+      const mdRes = await fetch(mdUrl, { cache: "no-store" });
+      if(!mdRes.ok) throw new Error("Could not load talk markdown file.");
+      const mdText = await mdRes.text();
+
+      talkContent.innerHTML = renderMarkdown(mdText);
+
+      setPill("Ready");
+    }
+
+    // Netlify JS submit helper
+    function encodeForm(data){
+      return Object.keys(data)
+        .map(key => encodeURIComponent(key) + "=" + encodeURIComponent(data[key]))
+        .join("&");
+    }
+
+    function lockForm(){
+      submitBtn.disabled = true;
+      el("employeeName").disabled = true;
+      el("ackCheck").disabled = true;
+      hintText.textContent = "Submitted — thank you.";
+      setPill("Submitted");
+    }
+
+    function unlockForm(){
+      submitBtn.disabled = false;
+      el("employeeName").disabled = false;
+      el("ackCheck").disabled = false;
+      hintText.textContent = "Your acknowledgement will be recorded.";
+      setPill("Ready");
+    }
+
+    // Handle submit
+    el("ackForm").addEventListener("submit", async (e) => {
       e.preventDefault();
-      msgOk.style.display = "none";
-      msgBad.style.display = "none";
 
-      // Ensure subject is freshest possible at click time
-      fSubj.value = buildEmailSubject(fTitle.value, fWeek.value, employeeName.value.trim() || "Employee");
+      // Guard: require talk loaded
+      if(!currentTalk){
+        setPill("Error");
+        showSuccessBanner("Please wait—still loading the toolbox talk.");
+        return;
+      }
 
-      const form = e.target;
-      const formData = new FormData(form);
+      // Build subject line (long format)
+      const name = el("employeeName").value.trim();
+      const subj = `OBC Toolbox Talk Acknowledgement — ${currentTalk.title} — ${currentTalk.week_of} — ${name}`;
+      subjectField.value = subj;
+
+      submitBtn.disabled = true;
+      hintText.textContent = "Submitting…";
+      setPill("Loading");
+
+      const payload = {
+        "form-name": "toolbox-ack",
+        "employee_name": name,
+        "acknowledged": "yes",
+        "talk_title": currentTalk.title,
+        "week_of": currentTalk.week_of,
+        "area": currentTalk.area,
+        "email_subject": subj
+      };
 
       try{
-        const res = await fetch("/", {
+        const resp = await fetch("/", {
           method: "POST",
           headers: { "Content-Type": "application/x-www-form-urlencoded" },
-          body: encode(Object.fromEntries(formData)),
-          cache: "no-store"
+          body: encodeForm(payload)
         });
 
-        // Netlify returns 200/302 normally
-        if(res.ok){
-          msgOk.style.display = "block";
-          // lock fields after submit (rugged behavior)
-          submitBtn.disabled = true;
-          employeeName.disabled = true;
-          ackCheck.disabled = true;
-        }else{
-          msgBad.style.display = "block";
+        // Netlify will typically return 200/201/302 depending on setup.
+        // We'll treat any 2xx as success.
+        if(!resp.ok && (resp.status < 200 || resp.status >= 300)){
+          throw new Error("Non-OK response");
         }
+
+        lockForm();
+        showSuccessBanner("Thank you — submitted.");
       }catch(err){
-        console.error(err);
-        msgBad.style.display = "block";
+        // No ugly error box. Just re-enable button + subtle hint.
+        unlockForm();
+        hintText.textContent = "Could not submit. Please check signal and try again.";
+        setPill("Error");
       }
     });
 
-    // Kickoff
-    loadTalk();
+    // Kick off
+    (async () => {
+      try{
+        await loadCurrentTalk();
+      }catch(e){
+        setPill("Error");
+        talkHeaderTitle.textContent = "Could not load toolbox talk";
+        talkHeaderSub.textContent = "Check that /talks/current.json exists and is valid.";
+        talkContent.innerHTML = "<p>Missing or invalid <b>/talks/current.json</b>, or missing markdown file in <b>/talks/</b>.</p>";
+        hintText.textContent = "Admin: fix current.json and/or the markdown file in /talks/.";
+      }
+    })();
   </script>
 </body>
 </html>
