@@ -4,6 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>OBC Weekly Toolbox Talk</title>
+  <meta name="description" content="OBC Weekly Toolbox Talk acknowledgement" />
 
   <style>
     :root{
@@ -15,13 +16,13 @@
       --shadow: 0 18px 45px rgba(0,0,0,.45);
       --radius: 18px;
 
-      --okBg: rgba(16, 185, 129, .18);
-      --okBd: rgba(16, 185, 129, .45);
-      --okTx: rgba(209, 250, 229, .98);
+      --okBg: rgba(34,197,94,.18);
+      --okBorder: rgba(34,197,94,.35);
+      --okText: #d1fae5;
 
-      --errBg: rgba(239, 68, 68, .14);
-      --errBd: rgba(239, 68, 68, .45);
-      --errTx: rgba(254, 226, 226, .98);
+      --errBg: rgba(239,68,68,.14);
+      --errBorder: rgba(239,68,68,.35);
+      --errText: rgba(254,226,226,.95);
     }
 
     *{ box-sizing:border-box; }
@@ -36,7 +37,7 @@
         linear-gradient(180deg, var(--bg1), var(--bg2));
       min-height:100vh;
       display:flex;
-      align-items:center;
+      align-items:flex-start;
       justify-content:center;
       padding:26px 18px;
     }
@@ -45,7 +46,7 @@
 
     .header{
       display:flex;
-      align-items:flex-start;
+      align-items:center;
       justify-content:space-between;
       flex-wrap:wrap;
       gap:14px;
@@ -87,29 +88,6 @@
       border:1px solid rgba(255,255,255,.10);
       background: rgba(10,16,30,.45);
       white-space:nowrap;
-      height: fit-content;
-    }
-
-    .banner{
-      display:none;
-      margin: 0 0 14px 0;
-      padding: 12px 14px;
-      border-radius: 14px;
-      border: 1px solid;
-      font-size: 14px;
-      line-height: 1.35;
-    }
-    .banner.ok{
-      background: var(--okBg);
-      border-color: var(--okBd);
-      color: var(--okTx);
-      display:none;
-    }
-    .banner.err{
-      background: var(--errBg);
-      border-color: var(--errBd);
-      color: var(--errTx);
-      display:none;
     }
 
     .panel{
@@ -122,9 +100,31 @@
 
     .panelInner{ padding:18px; }
 
+    .banner{
+      margin: 0 0 14px 0;
+      padding: 12px 14px;
+      border-radius: 14px;
+      border: 1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.06);
+      color: var(--ink);
+      display:none;
+    }
+    .banner.ok{
+      display:block;
+      background: var(--okBg);
+      border-color: var(--okBorder);
+      color: var(--okText);
+    }
+    .banner.err{
+      display:block;
+      background: var(--errBg);
+      border-color: var(--errBorder);
+      color: var(--errText);
+    }
+
     .grid{
       display:grid;
-      grid-template-columns: 1.35fr .85fr;
+      grid-template-columns: repeat(12, 1fr);
       gap:14px;
       align-items:stretch;
     }
@@ -135,128 +135,126 @@
       background: linear-gradient(180deg, rgba(17,28,52,.85), rgba(16,26,48,.65));
       box-shadow: 0 14px 28px rgba(0,0,0,.25);
       overflow:hidden;
-      position:relative;
-      min-height: 520px;
+      min-height: 420px;
     }
 
-    .cardHeader{
-      padding:16px 16px 12px 16px;
-      border-bottom:1px solid rgba(255,255,255,.08);
+    .talk{ grid-column: span 7; }
+    .ack{ grid-column: span 5; }
+
+    .cardHead{
+      padding:16px 16px 12px;
+      border-bottom: 1px solid rgba(255,255,255,.08);
       display:flex;
+      align-items:flex-start;
       justify-content:space-between;
       gap:10px;
-      align-items:flex-start;
     }
 
-    .chip{
+    .kicker{
+      color: var(--muted);
+      font-size: 12.5px;
+      margin-top:6px;
+    }
+
+    .pill{
       font-size:12px;
-      padding:7px 10px;
+      padding:6px 10px;
       border-radius:999px;
       border:1px solid rgba(255,255,255,.12);
       background: rgba(255,255,255,.06);
       color: rgba(234,240,255,.92);
       white-space:nowrap;
+      height: fit-content;
+      margin-top:2px;
     }
 
-    .talkTitle{
-      margin:0;
-      font-size:18px;
-      line-height:1.2;
+    .cardBody{
+      padding:16px;
     }
 
-    .talkMeta{
-      margin:6px 0 0 0;
-      color:var(--muted);
-      font-size:13px;
-    }
-
-    .content{
-      padding: 16px;
-      height: calc(100% - 74px);
+    .talkScroll{
+      max-height: 520px;
       overflow:auto;
+      padding-right: 10px;
     }
 
-    .content h2{
-      margin: 0 0 10px 0;
-      font-size: 28px;
-      letter-spacing: .2px;
+    .talkMetaLine{
+      display:flex;
+      flex-wrap:wrap;
+      gap:8px;
+      margin: 0 0 12px 0;
+      color: rgba(234,240,255,.92);
+      font-weight: 700;
     }
-    .content h3{
-      margin: 18px 0 8px 0;
-      font-size: 16px;
-      color: rgba(234,240,255,.95);
+    .talkMetaLine span{
+      color: var(--muted);
+      font-weight: 600;
     }
-    .content p{
-      margin: 10px 0;
+
+    /* Markdown-ish display */
+    .md h2, .md h3{
+      margin: 14px 0 8px;
+    }
+    .md p{
+      margin: 8px 0;
       color: rgba(234,240,255,.92);
       line-height: 1.45;
     }
-    .content ul{ margin: 8px 0 12px 18px; }
-    .content li{ margin: 6px 0; color: rgba(234,240,255,.92); }
+    .md ul{
+      margin: 8px 0 12px 18px;
+      color: rgba(234,240,255,.92);
+      line-height: 1.45;
+    }
+    .md li{ margin: 6px 0; }
 
-    /* Form side */
-    .formWrap{
-      padding: 16px;
-    }
-    .formTitle{
-      margin:0;
-      font-size: 18px;
-    }
-    .formSub{
-      margin: 6px 0 0 0;
-      color: var(--muted);
-      font-size: 13px;
-    }
-
+    /* Form */
     label{
       display:block;
-      margin: 14px 0 8px 0;
-      font-size: 13px;
-      color: rgba(234,240,255,.90);
+      font-size: 12.5px;
+      color: var(--muted);
+      margin: 0 0 6px 2px;
     }
 
     input[type="text"]{
       width:100%;
       padding: 12px 12px;
       border-radius: 12px;
-      border: 1px solid rgba(255,255,255,.12);
-      background: rgba(255,255,255,.06);
-      color: var(--ink);
-      outline:none;
+      border: 1px solid rgba(255,255,255,.14);
+      background: rgba(255,255,255,.92);
+      color: #0b1220;
       font-size: 14px;
+      outline: none;
     }
-    input[type="text"]::placeholder{ color: rgba(183,196,224,.75); }
 
     .checkRow{
-      display:flex;
-      gap:10px;
-      align-items:flex-start;
       margin-top: 12px;
       padding: 10px 12px;
       border-radius: 12px;
       border: 1px solid rgba(255,255,255,.10);
-      background: rgba(255,255,255,.04);
+      background: rgba(255,255,255,.06);
+      display:flex;
+      gap:10px;
+      align-items:flex-start;
+      color: rgba(234,240,255,.92);
+      font-size: 13px;
+      line-height: 1.35;
     }
-    .checkRow input{ margin-top: 3px; }
 
     .btn{
       width:100%;
       margin-top: 12px;
       padding: 12px 14px;
-      border-radius: 14px;
-      border: 1px solid rgba(255,255,255,.10);
-      background: linear-gradient(90deg, rgba(91,192,190,.95), rgba(122,167,255,.85));
-      color: rgba(10,16,30,.95);
-      font-weight: 700;
+      border-radius: 12px;
+      border: 1px solid rgba(255,255,255,.16);
+      background: linear-gradient(135deg, rgba(91,192,190,.95), rgba(122,167,255,.85));
+      color:#06101f;
+      font-weight: 800;
       letter-spacing: .2px;
       cursor:pointer;
       font-size: 14px;
+      box-shadow: 0 14px 28px rgba(0,0,0,.25);
     }
-    .btn:disabled{
-      opacity:.60;
-      cursor:not-allowed;
-      filter: grayscale(30%);
-    }
+    .btn:active{ transform: translateY(1px); }
 
     .footer{
       margin-top:12px;
@@ -266,8 +264,9 @@
     }
 
     @media (max-width: 980px){
-      .grid{ grid-template-columns: 1fr; }
-      .card{ min-height: 420px; }
+      .talk{ grid-column: span 12; }
+      .ack{ grid-column: span 12; }
+      .talkScroll{ max-height: 420px; }
       .meta{ width:100%; text-align:center; }
     }
   </style>
@@ -275,6 +274,7 @@
 
 <body>
   <div class="wrap">
+
     <div class="header">
       <div class="titleBlock">
         <div class="badge"></div>
@@ -286,218 +286,223 @@
       <div class="meta">Internal Use • OSHA-Themed</div>
     </div>
 
-    <!-- GREEN "Training-module style" success banner -->
-    <div id="okBanner" class="banner ok">✅ Thank you — submitted.</div>
-    <!-- Red error banner (only shows if something truly fails) -->
-    <div id="errBanner" class="banner err">❌ Could not submit. Please check signal and try again.</div>
+    <!-- Single top banner only -->
+    <div id="bannerOk" class="banner ok">✅ Thank you — submitted.</div>
+    <div id="bannerErr" class="banner err">❌ Could not submit. Please check signal and try again.</div>
 
     <div class="panel">
       <div class="panelInner">
         <div class="grid">
 
-          <!-- LEFT: TALK -->
-          <div class="card">
-            <div class="cardHeader">
+          <!-- LEFT: Talk -->
+          <section class="card talk" aria-label="Toolbox Talk">
+            <div class="cardHead">
               <div>
-                <div class="talkTitle" id="smallTitle">Loading…</div>
-                <div class="talkMeta" id="smallMeta">Please wait</div>
+                <div style="font-weight:900; font-size:18px;" id="talkTitleTop">Toolbox Talk</div>
+                <div class="kicker" id="talkSubTop">Week of — • Applies to —</div>
               </div>
-              <div class="chip">Toolbox Talk</div>
+              <div class="pill">Toolbox Talk</div>
             </div>
 
-            <div class="content">
-              <h2 id="bigTitle">Loading…</h2>
-              <p><strong>Week of:</strong> <span id="weekOf">—</span></p>
-              <p><strong>Applies to:</strong> <span id="area">—</span></p>
-              <div id="talkBody">
-                <p>Loading talk content…</p>
+            <div class="cardBody">
+              <div class="talkScroll">
+                <div class="talkMetaLine"><span>Week of:</span> <div id="talkWeek"></div></div>
+                <div class="talkMetaLine"><span>Applies to:</span> <div id="talkArea"></div></div>
+
+                <div class="md" id="talkBody">
+                  Loading…
+                </div>
               </div>
             </div>
-          </div>
+          </section>
 
-          <!-- RIGHT: ACK FORM -->
-          <div class="card">
-            <div class="cardHeader">
+          <!-- RIGHT: Acknowledgement -->
+          <section class="card ack" aria-label="Acknowledgement">
+            <div class="cardHead">
               <div>
-                <div class="formTitle">Acknowledgement</div>
-                <div class="formSub">Enter your name and confirm you read this talk.</div>
+                <div style="font-weight:900; font-size:18px;">Acknowledgement</div>
+                <div class="kicker">Enter your name and confirm you read this talk.</div>
               </div>
-              <div class="chip" id="statusChip" style="border-color: rgba(255,255,255,.12);">Ready</div>
+              <div class="pill" id="statusPill" style="display:none;">Submitted</div>
             </div>
 
-            <div class="formWrap">
+            <div class="cardBody">
 
-              <!-- IMPORTANT: Netlify must SEE this form in the HTML at deploy time -->
-              <form id="ackForm" name="toolbox-ack" method="POST" data-netlify="true" netlify-honeypot="bot-field">
-                <!-- Honeypot (spam trap) -->
-                <input type="hidden" name="bot-field" />
-                <!-- REQUIRED -->
+              <!-- REAL NETLIFY FORM (no JS submit) -->
+              <form name="toolbox-ack"
+                    method="POST"
+                    data-netlify="true"
+                    netlify-honeypot="bot-field"
+                    action="/talks/?submitted=1">
+
+                <!-- REQUIRED for reliable detection -->
                 <input type="hidden" name="form-name" value="toolbox-ack" />
 
-                <!-- Extra hidden fields so your email/submission includes the talk info -->
-                <input type="hidden" name="talk_title" id="hiddenTalkTitle" value="" />
-                <input type="hidden" name="talk_week_of" id="hiddenWeekOf" value="" />
-                <input type="hidden" name="talk_area" id="hiddenArea" value="" />
+                <!-- Honeypot -->
+                <p style="display:none;">
+                  <label>Don’t fill this out: <input name="bot-field" /></label>
+                </p>
 
-                <label for="employeeName">Employee name</label>
-                <input id="employeeName" name="employee_name" type="text" placeholder="Type your full name" autocomplete="name" required />
+                <label for="employee">Employee name</label>
+                <input id="employee" name="employee" type="text" autocomplete="name" required />
 
                 <div class="checkRow">
-                  <input id="confirmBox" name="confirmed" type="checkbox" value="Yes" required />
-                  <label for="confirmBox" style="margin:0; font-size:13px; color: rgba(234,240,255,.92);">
+                  <input id="ack" name="acknowledged" type="checkbox" value="Yes" required />
+                  <label for="ack" style="margin:0; color: rgba(234,240,255,.92); font-size:13px;">
                     I have read and understand this toolbox talk and will follow the safety requirements.
                   </label>
                 </div>
 
-                <!-- ONLY ONE submit button (no extra “submit” UI) -->
-                <button class="btn" id="submitBtn" type="submit">Submit Acknowledgement</button>
+                <!-- Helpful metadata sent to Netlify -->
+                <input type="hidden" id="metaTitle" name="talk_title" value="">
+                <input type="hidden" id="metaWeek" name="week_of" value="">
+                <input type="hidden" id="metaArea" name="area" value="">
+                <input type="hidden" id="metaFile" name="source_file" value="">
+
+                <button class="btn" type="submit">Submit Acknowledgement</button>
               </form>
 
             </div>
-          </div>
+          </section>
 
         </div>
-
-        <div class="footer">© OBC • Weekly Toolbox Talks</div>
       </div>
     </div>
+
+    <div class="footer">© OBC • Weekly Toolbox Talks</div>
+
   </div>
 
   <script>
-    const okBanner = document.getElementById("okBanner");
-    const errBanner = document.getElementById("errBanner");
-    const statusChip = document.getElementById("statusChip");
+    // Show only ONE banner at the top based on URL params.
+    (function(){
+      const ok = document.getElementById("bannerOk");
+      const err = document.getElementById("bannerErr");
+      ok.style.display = "none";
+      err.style.display = "none";
 
-    function showOk(){
-      errBanner.style.display = "none";
-      okBanner.style.display = "block";
-      statusChip.textContent = "Submitted";
-      statusChip.style.borderColor = "rgba(16,185,129,.45)";
-      statusChip.style.background = "rgba(16,185,129,.14)";
-    }
-    function showErr(){
-      okBanner.style.display = "none";
-      errBanner.style.display = "block";
-      statusChip.textContent = "Error";
-      statusChip.style.borderColor = "rgba(239,68,68,.50)";
-      statusChip.style.background = "rgba(239,68,68,.12)";
-    }
-    function clearBanners(){
-      okBanner.style.display = "none";
-      errBanner.style.display = "none";
-      statusChip.textContent = "Ready";
-      statusChip.style.borderColor = "rgba(255,255,255,.12)";
-      statusChip.style.background = "rgba(255,255,255,.06)";
-    }
-
-    // Very simple markdown-to-HTML (enough for your bullet lists & headings)
-    function mdToHtml(md){
-      if(!md) return "";
-      // Escape basic
-      let s = md.replace(/</g,"&lt;").replace(/>/g,"&gt;");
-      // Headings
-      s = s.replace(/^###\s+(.*)$/gm, "<h3>$1</h3>");
-      s = s.replace(/^##\s+(.*)$/gm, "<h3>$1</h3>");
-      // Bold
-      s = s.replace(/\*\*(.*?)\*\*/g, "<strong>$1</strong>");
-      // Bullets
-      s = s.replace(/^\s*-\s+(.*)$/gm, "<li>$1</li>");
-      // Wrap consecutive <li> in <ul>
-      s = s.replace(/(<li>.*<\/li>\s*)+/g, (m)=>"<ul>"+m+"</ul>");
-      // Paragraphs (split by blank lines)
-      const parts = s.split(/\n\s*\n/).map(p=>{
-        // if already block-level, return
-        if(p.trim().startsWith("<h") || p.trim().startsWith("<ul>")) return p;
-        // line breaks inside paragraphs
-        const cleaned = p.replace(/\n/g,"<br>");
-        return "<p>"+cleaned+"</p>";
-      });
-      return parts.join("\n");
-    }
-
-    async function loadTalk(){
-      // Reads: /talks/current.json -> { title, week_of, area, file }
-      const res = await fetch("/talks/current.json", { cache: "no-store" });
-      if(!res.ok) throw new Error("Could not load current.json");
-      const info = await res.json();
-
-      // Fill headers
-      document.getElementById("smallTitle").textContent = info.title || "Toolbox Talk";
-      document.getElementById("smallMeta").textContent = `${info.week_of || ""}${info.area ? " • " + info.area : ""}`.trim();
-      document.getElementById("bigTitle").textContent = info.title || "Toolbox Talk";
-      document.getElementById("weekOf").textContent = info.week_of || "—";
-      document.getElementById("area").textContent = info.area || "—";
-
-      // Hidden fields for submission
-      document.getElementById("hiddenTalkTitle").value = info.title || "";
-      document.getElementById("hiddenWeekOf").value = info.week_of || "";
-      document.getElementById("hiddenArea").value = info.area || "";
-
-      // Load the markdown file referenced by current.json
-      if(info.file){
-        const mdRes = await fetch("/talks/" + info.file, { cache: "no-store" });
-        if(mdRes.ok){
-          const md = await mdRes.text();
-          document.getElementById("talkBody").innerHTML = mdToHtml(md);
-        } else {
-          document.getElementById("talkBody").innerHTML =
-            "<p>Could not load talk file. Check that the filename in <strong>talks/current.json</strong> matches a file in <strong>/talks/</strong>.</p>";
-        }
-      } else {
-        document.getElementById("talkBody").innerHTML =
-          "<p>No talk file specified in <strong>talks/current.json</strong>.</p>";
+      const params = new URLSearchParams(location.search);
+      if (params.get("submitted") === "1") {
+        ok.style.display = "block";
+        const pill = document.getElementById("statusPill");
+        pill.style.display = "inline-flex";
+        // remove the query so refresh doesn't keep showing it
+        history.replaceState({}, "", location.pathname);
       }
-    }
-
-    // Netlify submit (same approach as your working training modules)
-    async function submitToNetlify(form){
-      const formData = new FormData(form);
-      const params = new URLSearchParams();
-      for (const [k, v] of formData.entries()) params.append(k, v);
-
-      const res = await fetch("/", {
-        method: "POST",
-        headers: { "Content-Type": "application/x-www-form-urlencoded" },
-        body: params.toString()
-      });
-
-      // Netlify typically responds 200/302; treat any ok as success
-      return res.ok;
-    }
-
-    (async function init(){
-      try{
-        await loadTalk();
-      }catch(e){
-        document.getElementById("talkBody").innerHTML =
-          "<p>Could not load toolbox talk content. Please refresh.</p>";
+      if (params.get("error") === "1") {
+        err.style.display = "block";
+        history.replaceState({}, "", location.pathname);
       }
-
-      const form = document.getElementById("ackForm");
-      const btn = document.getElementById("submitBtn");
-
-      form.addEventListener("submit", async (ev)=>{
-        ev.preventDefault();
-        clearBanners();
-        btn.disabled = true;
-
-        try{
-          const ok = await submitToNetlify(form);
-          if(ok){
-            showOk();
-            // lock the form after success
-            document.getElementById("employeeName").disabled = true;
-            document.getElementById("confirmBox").disabled = true;
-          } else {
-            showErr();
-            btn.disabled = false;
-          }
-        }catch(err){
-          showErr();
-          btn.disabled = false;
-        }
-      });
     })();
+
+    // Load current talk metadata & markdown file path from talks/current.json
+    // Folder structure you have:
+    // /talks/current.json
+    // /talks/2026-01-12-housekeeping-trip-hazards.md
+    async function loadTalk(){
+      const currentUrl = "/talks/current.json";
+      const mdContainer = document.getElementById("talkBody");
+
+      try{
+        const metaRes = await fetch(currentUrl, { cache: "no-store" });
+        if(!metaRes.ok) throw new Error("Could not load current.json");
+        const meta = await metaRes.json();
+
+        const title = meta.title || "Weekly Toolbox Talk";
+        const week = meta.week_of || "";
+        const area = meta.area || "";
+        const file = meta.file || "";
+
+        document.getElementById("talkTitleTop").textContent = title;
+        document.getElementById("talkSubTop").textContent = `${week} • ${area}`;
+        document.getElementById("talkWeek").textContent = week;
+        document.getElementById("talkArea").textContent = area;
+
+        // Fill hidden fields so Netlify stores what talk they acknowledged
+        document.getElementById("metaTitle").value = title;
+        document.getElementById("metaWeek").value = week;
+        document.getElementById("metaArea").value = area;
+        document.getElementById("metaFile").value = file;
+
+        if(!file){
+          mdContainer.textContent = "No talk file configured in current.json.";
+          return;
+        }
+
+        const mdRes = await fetch(`/talks/${file}`, { cache: "no-store" });
+        if(!mdRes.ok) throw new Error("Could not load talk markdown");
+        const mdText = await mdRes.text();
+
+        // Minimal markdown renderer: headings + bullets + paragraphs.
+        // (Keeps it simple and reliable with no external libraries.)
+        mdContainer.innerHTML = renderBasicMarkdown(mdText);
+
+      } catch(e){
+        mdContainer.innerHTML = `<p style="color:rgba(254,226,226,.95);">
+          Could not load this week’s talk. Please refresh, or try again.
+        </p>`;
+        // Optional: show top error banner if talk load fails
+        const err = document.getElementById("bannerErr");
+        err.style.display = "block";
+      }
+    }
+
+    function escapeHtml(s){
+      return s.replace(/[&<>"']/g, m => ({
+        "&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;"
+      }[m]));
+    }
+
+    function renderBasicMarkdown(md){
+      const lines = md.replace(/\r\n/g, "\n").split("\n");
+      let html = "";
+      let inList = false;
+
+      const closeList = () => {
+        if(inList){ html += "</ul>"; inList = false; }
+      };
+
+      for(const raw of lines){
+        const line = raw.trim();
+
+        if(!line){
+          closeList();
+          continue;
+        }
+
+        // Headings
+        if(line.startsWith("### ")){
+          closeList();
+          html += `<h3>${escapeHtml(line.slice(4))}</h3>`;
+          continue;
+        }
+        if(line.startsWith("## ")){
+          closeList();
+          html += `<h2>${escapeHtml(line.slice(3))}</h2>`;
+          continue;
+        }
+        if(line.startsWith("# ")){
+          closeList();
+          html += `<h2>${escapeHtml(line.slice(2))}</h2>`;
+          continue;
+        }
+
+        // Bullets
+        if(line.startsWith("- ") || line.startsWith("• ")){
+          if(!inList){ html += "<ul>"; inList = true; }
+          html += `<li>${escapeHtml(line.slice(2))}</li>`;
+          continue;
+        }
+
+        closeList();
+        html += `<p>${escapeHtml(line)}</p>`;
+      }
+
+      closeList();
+      return html;
+    }
+
+    loadTalk();
   </script>
 </body>
 </html>
