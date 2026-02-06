@@ -1,6 +1,6 @@
 # Welding Fumes & Ventilation  
-**Week of:** January 26, 2026  
-**Applies to:** Shop, Field, Yard  
+**Week of:** February 09, 2026  
+**Applies to:** Shop, Field  
 
 ---
 
