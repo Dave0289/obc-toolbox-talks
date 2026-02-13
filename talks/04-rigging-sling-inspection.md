@@ -1,6 +1,6 @@
 # Rigging & Sling Inspection  
-**Week of:** January 26, 2026  
-**Applies to:** Shop, Field, Yard  
+**Week of:** February 16, 2026  
+**Applies to:** Shop, Field  
 
 ---
 
