@@ -1,5 +1,5 @@
 # Pinch Points & Stored Energy  
-**Week of:** January 26, 2026  
+**Week of:** March 2, 2026  
 **Applies to:** Shop, Field, Yard  
 
 ---
