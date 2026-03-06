@@ -1,5 +1,5 @@
 # Grinding & Abrasive Wheel Safety  
-**Week of:** January 26, 2026  
+**Week of:** March 09, 2026  
 **Applies to:** Shop, Field, Yard  
 
 ---
