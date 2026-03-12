@@ -1,5 +1,5 @@
 # Steel Erection – Load Stability & Connections  
-**Week of:** January 26, 2026  
+**Week of:** March 16, 2026  
 **Applies to:** Shop, Field, Yard  
 
 ---
