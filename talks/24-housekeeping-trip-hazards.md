@@ -1,5 +1,5 @@
 # Housekeeping & Trip Hazards  
-**Week of:** January 12, 2026  
+**Week of:** March 30, 2026  
 **Applies to:** Field & Shop  
 
 ---
