@@ -1,10 +1,17 @@
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>OBC Weekly Toolbox Talk</title>
-  <meta name="description" content="OBC Weekly Toolbox Talk acknowledgement" />
+
+  <title>Suncoast Industries Weekly Safety Talk</title>
+
+  <meta
+    name="description"
+    content="Suncoast Industries Weekly Safety Talk acknowledgement"
+  />
+
   <meta http-equiv="Cache-Control" content="no-store" />
 
   <style>
@@ -60,7 +67,7 @@
       display:flex;
       gap:14px;
       align-items:center;
-      min-width: 320px;
+      min-width:320px;
     }
 
     .badge{
@@ -76,7 +83,7 @@
       margin:0;
       font-size: clamp(22px, 3vw, 34px);
       line-height:1.15;
-      letter-spacing: .2px;
+      letter-spacing:.2px;
     }
 
     .sub{
@@ -98,27 +105,21 @@
 
     .banner{
       display:none;
-      margin: 0 0 14px 0;
-      padding: 12px 14px;
-      border-radius: 12px;
-      border: 1px solid var(--successStroke);
+      margin:0 0 14px 0;
+      padding:12px 14px;
+      border-radius:12px;
+      border:1px solid var(--successStroke);
       background: var(--successBg);
       color: var(--successText);
-      box-shadow: 0 10px 22px rgba(0,0,0,.22);
-      font-size: 14px;
-      line-height: 1.25;
-    }
-
-    .banner.error{
-      border-color: var(--errorStroke);
-      background: var(--errorBg);
-      color: var(--errorText);
+      box-shadow:0 10px 22px rgba(0,0,0,.22);
+      font-size:14px;
+      line-height:1.25;
     }
 
     .banner .mutedLine{
-      margin-top: 4px;
+      margin-top:4px;
       color: rgba(210,255,230,.88);
-      font-size: 13px;
+      font-size:13px;
     }
 
     .panel{
@@ -127,7 +128,7 @@
       background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03));
       box-shadow: var(--shadow);
       overflow:hidden;
-      padding: 16px;
+      padding:16px;
     }
 
     .grid{
@@ -140,9 +141,9 @@
       border-radius:16px;
       border:1px solid var(--stroke);
       background: linear-gradient(180deg, var(--card1), var(--card2));
-      box-shadow: 0 14px 28px rgba(0,0,0,.25);
+      box-shadow:0 14px 28px rgba(0,0,0,.25);
       overflow:hidden;
-      min-height: 420px;
+      min-height:420px;
     }
 
     .cardHeader{
@@ -150,7 +151,7 @@
       align-items:center;
       justify-content:space-between;
       gap:10px;
-      padding: 14px 16px;
+      padding:14px 16px;
       border-bottom:1px solid rgba(255,255,255,.08);
     }
 
@@ -165,190 +166,236 @@
     }
 
     .talkTitle{
-      font-size: 16px;
-      font-weight: 700;
+      font-size:16px;
+      font-weight:700;
       margin:0;
     }
 
     .talkMeta{
-      margin: 2px 0 0 0;
-      font-size: 12px;
+      margin:2px 0 0 0;
+      font-size:12px;
       color: rgba(183,196,224,.92);
     }
 
     .cardBody{
-      padding: 14px 16px 16px 16px;
+      padding:14px 16px 16px 16px;
     }
 
-    /* LEFT: talk scroll area */
     .talkScroll{
-      max-height: 64vh;
+      max-height:64vh;
       overflow:auto;
-      padding-right: 8px;
+      padding-right:8px;
     }
 
     .talkScroll h2{
-      margin: 8px 0 10px 0;
-      font-size: 26px;
-      letter-spacing: .2px;
+      margin:8px 0 10px 0;
+      font-size:26px;
+      letter-spacing:.2px;
     }
 
     .kv{
       display:grid;
-      grid-template-columns: 90px 1fr;
-      gap: 6px 10px;
-      margin: 10px 0 14px 0;
-      padding: 10px 12px;
-      border-radius: 12px;
-      border: 1px solid rgba(255,255,255,.10);
+      grid-template-columns:90px 1fr;
+      gap:6px 10px;
+      margin:10px 0 14px 0;
+      padding:10px 12px;
+      border-radius:12px;
+      border:1px solid rgba(255,255,255,.10);
       background: rgba(0,0,0,.16);
     }
-    .k{ color: rgba(183,196,224,.95); font-size: 13px; }
-    .v{ color: rgba(234,240,255,.98); font-size: 13px; font-weight: 600; }
+
+    .k{
+      color: rgba(183,196,224,.95);
+      font-size:13px;
+    }
+
+    .v{
+      color: rgba(234,240,255,.98);
+      font-size:13px;
+      font-weight:600;
+    }
 
     .md{
       color: rgba(234,240,255,.96);
-      font-size: 14px;
-      line-height: 1.45;
-      white-space: normal;
+      font-size:14px;
+      line-height:1.45;
+      white-space:normal;
     }
-    .md h1,.md h2,.md h3{ margin: 14px 0 8px 0; }
-    .md ul{ margin: 8px 0 8px 20px; }
-    .md li{ margin: 4px 0; }
-    .md p{ margin: 8px 0; }
 
-    /* RIGHT: form */
-    .formRow{ margin-bottom: 12px; }
+    .md h1,.md h2,.md h3{
+      margin:14px 0 8px 0;
+    }
+
+    .md ul{
+      margin:8px 0 8px 20px;
+    }
+
+    .md li{
+      margin:4px 0;
+    }
+
+    .md p{
+      margin:8px 0;
+    }
+
+    .formRow{
+      margin-bottom:12px;
+    }
 
     label{
       display:block;
-      font-size: 12px;
+      font-size:12px;
       color: rgba(183,196,224,.95);
-      margin-bottom: 6px;
+      margin-bottom:6px;
     }
 
     input[type="text"]{
-      width: 100%;
-      padding: 12px 12px;
-      border-radius: 12px;
-      border: 1px solid rgba(255,255,255,.10);
+      width:100%;
+      padding:12px 12px;
+      border-radius:12px;
+      border:1px solid rgba(255,255,255,.10);
       background: rgba(255,255,255,.08);
       color: rgba(234,240,255,.98);
-      outline: none;
+      outline:none;
     }
-    input[type="text"]::placeholder{ color: rgba(183,196,224,.75); }
+
+    input[type="text"]::placeholder{
+      color: rgba(183,196,224,.75);
+    }
 
     .checkLine{
       display:flex;
-      gap: 10px;
+      gap:10px;
       align-items:flex-start;
-      padding: 10px 12px;
-      border-radius: 12px;
-      border: 1px solid rgba(255,255,255,.10);
+      padding:10px 12px;
+      border-radius:12px;
+      border:1px solid rgba(255,255,255,.10);
       background: rgba(0,0,0,.16);
       color: rgba(234,240,255,.96);
-      font-size: 13px;
-      line-height: 1.25;
+      font-size:13px;
+      line-height:1.25;
     }
 
-    .checkLine input{ margin-top: 2px; }
+    .checkLine input{
+      margin-top:2px;
+    }
 
     .checkText .es{
       display:block;
-      margin-top: 4px;
+      margin-top:4px;
       color: rgba(234,240,255,.88);
-      font-size: 12.5px;
-      line-height: 1.25;
+      font-size:12.5px;
+      line-height:1.25;
     }
 
     .btn{
       width:100%;
-      padding: 12px 14px;
-      border-radius: 12px;
-      border: none;
+      padding:12px 14px;
+      border-radius:12px;
+      border:none;
       cursor:pointer;
-      font-size: 15px;
-      font-weight: 700;
-      letter-spacing: .2px;
+      font-size:15px;
+      font-weight:700;
+      letter-spacing:.2px;
       background: linear-gradient(90deg, rgba(91,192,190,.95), rgba(122,167,255,.85));
       color: rgba(10,16,30,.98);
-      box-shadow: 0 12px 24px rgba(0,0,0,.22);
-    }
-    .btn:disabled{
-      opacity:.55;
-      cursor:not-allowed;
+      box-shadow:0 12px 24px rgba(0,0,0,.22);
     }
 
     .foot{
-      margin-top: 10px;
-      font-size: 12px;
+      margin-top:10px;
+      font-size:12px;
       color: rgba(183,196,224,.85);
       text-align:center;
     }
 
     .smallNote{
-      margin-top: 10px;
-      font-size: 12px;
+      margin-top:10px;
+      font-size:12px;
       color: rgba(183,196,224,.85);
-      line-height: 1.35;
+      line-height:1.35;
     }
+
     .smallNote .es{
       display:block;
-      margin-top: 4px;
+      margin-top:4px;
       color: rgba(183,196,224,.82);
     }
 
-    @media (max-width: 980px){
-      .grid{ grid-template-columns: 1fr; }
-      .talkScroll{ max-height: 52vh; }
+    @media (max-width:980px){
+      .grid{
+        grid-template-columns:1fr;
+      }
+
+      .talkScroll{
+        max-height:52vh;
+      }
     }
   </style>
 </head>
 
 <body>
   <div class="wrap">
+
     <div class="header">
       <div class="titleBlock">
         <div class="badge"></div>
+
         <div>
-          <h1>OBC Weekly Toolbox Talk</h1>
+          <h1>Suncoast Industries Weekly Safety Talk</h1>
+
           <p class="sub">
             Read this week’s safety talk and acknowledge completion.<br>
-            <span style="color: rgba(183,196,224,.9); font-size: 0.95em;">
+
+            <span style="color: rgba(183,196,224,.9); font-size:0.95em;">
               Lea la charla de seguridad de esta semana y confirme su participación.
             </span>
           </p>
         </div>
       </div>
-      <div class="meta">Internal Use • OSHA-Themed</div>
+
+      <div class="meta">
+        Internal Use • OSHA-Themed
+      </div>
     </div>
 
-    <!-- Success banner (like your training modules) -->
     <div id="banner" class="banner">
       ✅ Thank you — your acknowledgement was submitted.
-      <div class="mutedLine">✅ Gracias — su confirmación fue enviada.</div>
+
+      <div class="mutedLine">
+        ✅ Gracias — su confirmación fue enviada.
+      </div>
     </div>
 
     <div class="panel">
+
       <div class="grid">
 
-        <!-- LEFT: talk -->
-        <section class="card" aria-label="Toolbox talk">
+        <!-- LEFT -->
+        <section class="card" aria-label="Safety talk">
+
           <div class="cardHeader">
             <div>
               <p id="talkTitleTop" class="talkTitle">Loading…</p>
-              <p id="talkMetaTop" class="talkMeta">Please wait.</p>
+
+              <p id="talkMetaTop" class="talkMeta">
+                Please wait.
+              </p>
             </div>
-            <span class="chip">Toolbox Talk</span>
+
+            <span class="chip">Safety Talk</span>
           </div>
 
           <div class="cardBody">
+
             <div class="talkScroll">
+
               <h2 id="talkTitleH2">Loading…</h2>
 
               <div class="kv">
                 <div class="k">Week of / Semana de:</div>
                 <div id="weekOf" class="v">—</div>
+
                 <div class="k">Applies to / Aplica a:</div>
                 <div id="area" class="v">—</div>
               </div>
@@ -356,191 +403,283 @@
               <div id="md" class="md">
                 Loading talk content…
               </div>
+
             </div>
           </div>
         </section>
 
-        <!-- RIGHT: acknowledgement -->
+        <!-- RIGHT -->
         <section class="card" aria-label="Acknowledgement">
+
           <div class="cardHeader">
             <div>
-              <p class="talkTitle">Acknowledgement / Confirmación</p>
+
+              <p class="talkTitle">
+                Acknowledgement / Confirmación
+              </p>
+
               <p class="talkMeta">
                 Enter your name and confirm you read this talk.<br>
+
                 Ingrese su nombre y confirme que leyó esta charla.
               </p>
             </div>
-            <!-- NO extra submit button here -->
-            <span id="statusChip" class="chip" style="border-color: rgba(255,255,255,.14);">Ready</span>
+
+            <span
+              id="statusChip"
+              class="chip"
+              style="border-color: rgba(255,255,255,.14);"
+            >
+              Ready
+            </span>
           </div>
 
           <div class="cardBody">
 
-            <!-- IMPORTANT: This is a REAL Netlify form -->
-            <!-- Netlify detects it at deploy time. -->
             <form
               id="ackForm"
-              name="toolbox-ack"
+              name="safety-talk-ack"
               method="POST"
               data-netlify="true"
               action="/?submitted=true"
             >
-              <input type="hidden" name="form-name" value="toolbox-ack" />
 
-              <!-- Hidden fields that will be captured with the form -->
+              <input
+                type="hidden"
+                name="form-name"
+                value="safety-talk-ack"
+              />
+
               <input type="hidden" name="talk_title" id="f_talk_title" value="" />
               <input type="hidden" name="talk_week_of" id="f_talk_week_of" value="" />
               <input type="hidden" name="talk_area" id="f_talk_area" value="" />
               <input type="hidden" name="talk_file" id="f_talk_file" value="" />
 
               <div class="formRow">
-                <label for="employee">Employee name / Nombre del empleado</label>
-                <input id="employee" type="text" name="employee" placeholder="First Last / Nombre Apellido" required />
+                <label for="employee">
+                  Employee name / Nombre del empleado
+                </label>
+
+                <input
+                  id="employee"
+                  type="text"
+                  name="employee"
+                  placeholder="First Last / Nombre Apellido"
+                  required
+                />
               </div>
 
               <div class="formRow">
+
                 <label class="checkLine">
-                  <input id="ack" type="checkbox" name="acknowledged" value="yes" required />
+
+                  <input
+                    id="ack"
+                    type="checkbox"
+                    name="acknowledged"
+                    value="yes"
+                    required
+                  />
+
                   <span class="checkText">
-                    I have read and understand this toolbox talk and will follow the safety requirements.
-                    <span class="es">He leído y entiendo esta charla de seguridad y cumpliré los requisitos de seguridad.</span>
+
+                    I have read and understand this safety talk and will follow the safety requirements.
+
+                    <span class="es">
+                      He leído y entiendo esta charla de seguridad y cumpliré los requisitos de seguridad.
+                    </span>
+
                   </span>
                 </label>
               </div>
 
-              <button class="btn" type="submit" id="submitBtn">Submit Acknowledgement / Enviar Confirmación</button>
+              <button
+                class="btn"
+                type="submit"
+                id="submitBtn"
+              >
+                Submit Acknowledgement / Enviar Confirmación
+              </button>
 
               <div class="smallNote">
                 If you accidentally submit twice, notify your supervisor — do not resubmit.
-                <span class="es">Si envía la confirmación dos veces por accidente, notifique a su supervisor — no la vuelva a enviar.</span>
-              </div>
-            </form>
 
+                <span class="es">
+                  Si envía la confirmación dos veces por accidente, notifique a su supervisor — no la vuelva a enviar.
+                </span>
+              </div>
+
+            </form>
           </div>
         </section>
-
       </div>
     </div>
 
-    <div class="foot">© OBC • Weekly Toolbox Talks</div>
+    <div class="foot">
+      © Suncoast Industries • Weekly Safety Talks
+    </div>
+
   </div>
 
 <script>
-  // --- Show green banner when redirected back with ?submitted=true
-  (function () {
-    const params = new URLSearchParams(window.location.search);
-    const banner = document.getElementById('banner');
-    const statusChip = document.getElementById('statusChip');
 
-    if (params.get('submitted') === 'true') {
-      banner.style.display = 'block';
-      statusChip.textContent = 'Submitted / Enviado';
-      statusChip.style.borderColor = 'rgba(46, 204, 113, .55)';
-      statusChip.style.background = 'rgba(46, 204, 113, .12)';
+(function () {
 
-      // Clean the URL (so refresh doesn’t keep showing the banner forever)
-      const cleanUrl = window.location.pathname;
-      window.history.replaceState({}, document.title, cleanUrl);
-    }
-  })();
+  const params = new URLSearchParams(window.location.search);
 
-  // --- Tiny markdown-ish renderer (safe-ish for your controlled content)
-  function renderBasicMarkdown(mdText) {
-    // escape HTML
-    let s = mdText
-      .replace(/&/g, "&amp;")
-      .replace(/</g, "&lt;")
-      .replace(/>/g, "&gt;");
+  const banner = document.getElementById('banner');
 
-    // headings
-    s = s.replace(/^###\s+(.*)$/gm, "<h3>$1</h3>");
-    s = s.replace(/^##\s+(.*)$/gm, "<h2>$1</h2>");
-    s = s.replace(/^#\s+(.*)$/gm, "<h1>$1</h1>");
+  const statusChip = document.getElementById('statusChip');
 
-    // bold
-    s = s.replace(/\*\*(.+?)\*\*/g, "<b>$1</b>");
+  if (params.get('submitted') === 'true') {
 
-    // unordered lists
-    // convert lines starting with "- " into <li>
-    s = s.replace(/^\s*-\s+(.*)$/gm, "<li>$1</li>");
-    // wrap consecutive <li> blocks into <ul>
-    s = s.replace(/(?:<li>.*<\/li>\s*)+/g, (m) => "<ul>" + m + "</ul>");
+    banner.style.display = 'block';
 
-    // paragraphs: split by blank lines
-    const blocks = s.split(/\n\s*\n/).map(b => b.trim()).filter(Boolean);
-    s = blocks.map(b => {
-      // if already block-level, keep it
-      if (b.startsWith("<h") || b.startsWith("<ul>")) return b;
-      // convert single line breaks to <br>
-      b = b.replace(/\n/g, "<br>");
-      return "<p>" + b + "</p>";
-    }).join("\n");
+    statusChip.textContent = 'Submitted / Enviado';
 
-    return s;
+    statusChip.style.borderColor = 'rgba(46, 204, 113, .55)';
+
+    statusChip.style.background = 'rgba(46, 204, 113, .12)';
+
+    const cleanUrl = window.location.pathname;
+
+    window.history.replaceState({}, document.title, cleanUrl);
   }
 
-  async function loadCurrentTalk() {
-    const talkTitleTop = document.getElementById('talkTitleTop');
-    const talkMetaTop  = document.getElementById('talkMetaTop');
-    const talkTitleH2  = document.getElementById('talkTitleH2');
-    const weekOfEl     = document.getElementById('weekOf');
-    const areaEl       = document.getElementById('area');
-    const mdEl         = document.getElementById('md');
+})();
 
-    // hidden form fields
-    const fTitle = document.getElementById('f_talk_title');
-    const fWeek  = document.getElementById('f_talk_week_of');
-    const fArea  = document.getElementById('f_talk_area');
-    const fFile  = document.getElementById('f_talk_file');
+function renderBasicMarkdown(mdText) {
 
-    try {
-      // Your repo file: /talks/current.json
-      const curRes = await fetch('/talks/current.json', { cache: 'no-store' });
-      if (!curRes.ok) throw new Error('Could not load current.json');
-      const cur = await curRes.json();
+  let s = mdText
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;");
 
-      const title = cur.title || 'Weekly Toolbox Talk';
-      const week_of = cur.week_of || '';
-      const area = cur.area || '';
-      const file = cur.file || '';
+  s = s.replace(/^###\s+(.*)$/gm, "<h3>$1</h3>");
+  s = s.replace(/^##\s+(.*)$/gm, "<h2>$1</h2>");
+  s = s.replace(/^#\s+(.*)$/gm, "<h1>$1</h1>");
 
-      talkTitleTop.textContent = title;
-      talkMetaTop.textContent = (week_of ? week_of : '—') + (area ? ' • ' + area : '');
-      talkTitleH2.textContent = title;
-      weekOfEl.textContent = week_of || '—';
-      areaEl.textContent = area || '—';
+  s = s.replace(/\*\*(.+?)\*\*/g, "<b>$1</b>");
 
-      // fill hidden form fields so the submission includes the talk info
-      fTitle.value = title;
-      fWeek.value  = week_of;
-      fArea.value  = area;
-      fFile.value  = file;
+  s = s.replace(/^\s*-\s+(.*)$/gm, "<li>$1</li>");
 
-      if (!file) {
-        mdEl.textContent = 'No talk file defined in current.json.';
-        return;
-      }
+  s = s.replace(/(?:<li>.*<\/li>\s*)+/g, (m) => "<ul>" + m + "</ul>");
 
-      // Your repo file: /talks/<filename>.md
-      const mdRes = await fetch('/talks/' + file, { cache: 'no-store' });
-      if (!mdRes.ok) throw new Error('Could not load talk markdown');
-      const mdText = await mdRes.text();
+  const blocks = s.split(/\n\s*\n/).map(b => b.trim()).filter(Boolean);
 
-      mdEl.innerHTML = renderBasicMarkdown(mdText);
+  s = blocks.map(b => {
 
-    } catch (err) {
-      talkTitleTop.textContent = 'Toolbox Talk';
-      talkMetaTop.textContent = 'Could not load weekly talk.';
-      talkTitleH2.textContent = 'Toolbox Talk';
-      weekOfEl.textContent = '—';
-      areaEl.textContent = '—';
-      mdEl.textContent = 'Error loading talk content. Please contact supervisor.';
-      console.error(err);
+    if (b.startsWith("<h") || b.startsWith("<ul>")) return b;
+
+    b = b.replace(/\n/g, "<br>");
+
+    return "<p>" + b + "</p>";
+
+  }).join("\n");
+
+  return s;
+}
+
+async function loadCurrentTalk() {
+
+  const talkTitleTop = document.getElementById('talkTitleTop');
+
+  const talkMetaTop = document.getElementById('talkMetaTop');
+
+  const talkTitleH2 = document.getElementById('talkTitleH2');
+
+  const weekOfEl = document.getElementById('weekOf');
+
+  const areaEl = document.getElementById('area');
+
+  const mdEl = document.getElementById('md');
+
+  const fTitle = document.getElementById('f_talk_title');
+
+  const fWeek = document.getElementById('f_talk_week_of');
+
+  const fArea = document.getElementById('f_talk_area');
+
+  const fFile = document.getElementById('f_talk_file');
+
+  try {
+
+    const curRes = await fetch('/talks/current.json', { cache: 'no-store' });
+
+    if (!curRes.ok) {
+      throw new Error('Could not load current.json');
     }
-  }
 
-  loadCurrentTalk();
+    const cur = await curRes.json();
+
+    const title = cur.title || 'Weekly Safety Talk';
+
+    const week_of = cur.week_of || '';
+
+    const area = cur.area || '';
+
+    const file = cur.file || '';
+
+    talkTitleTop.textContent = title;
+
+    talkMetaTop.textContent =
+      (week_of ? week_of : '—') +
+      (area ? ' • ' + area : '');
+
+    talkTitleH2.textContent = title;
+
+    weekOfEl.textContent = week_of || '—';
+
+    areaEl.textContent = area || '—';
+
+    fTitle.value = title;
+
+    fWeek.value = week_of;
+
+    fArea.value = area;
+
+    fFile.value = file;
+
+    if (!file) {
+
+      mdEl.textContent = 'No talk file defined in current.json.';
+
+      return;
+    }
+
+    const mdRes = await fetch('/talks/' + file, { cache: 'no-store' });
+
+    if (!mdRes.ok) {
+      throw new Error('Could not load talk markdown');
+    }
+
+    const mdText = await mdRes.text();
+
+    mdEl.innerHTML = renderBasicMarkdown(mdText);
+
+  } catch (err) {
+
+    talkTitleTop.textContent = 'Safety Talk';
+
+    talkMetaTop.textContent = 'Could not load weekly talk.';
+
+    talkTitleH2.textContent = 'Safety Talk';
+
+    weekOfEl.textContent = '—';
+
+    areaEl.textContent = '—';
+
+    mdEl.textContent =
+      'Error loading talk content. Please contact supervisor.';
+
+    console.error(err);
+  }
+}
+
+loadCurrentTalk();
+
 </script>
 
 </body>
 </html>
+```
