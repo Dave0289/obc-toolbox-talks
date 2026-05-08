@@ -23,8 +23,7 @@ storage, or use of compressed gas cylinders.
 
 ### Controls
 
--   Store cylinders **upright and secured** with chains or straps at all
-    times.\
+-   Store cylinders **upright and secured** with chains or straps.\
 -   Keep protective caps installed when cylinders are not in use.\
 -   Separate oxygen and fuel gas cylinders by **20 feet** or with an
     approved barrier.\
